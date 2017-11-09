@@ -58,7 +58,7 @@ class LinkedList(object):
             current_node = current_node.next_node
 
     def remove(self, val):
-        """Remove node from anywhere in the linked list with the given value."""
+        """Remove node from anywhere in the linked list with the val."""
         if self.head.data != val:
             current_node = self.head
             while current_node.next_node is not None:
@@ -75,14 +75,13 @@ class LinkedList(object):
     def display(self):
         """Present a visual representation of the linked list."""
         node = self.head
-        display_str = ' '
-        while node is not None:
-                display_str += ' '
-                display_str += '\''
-                display_str += str(node.data)
-                display_str += '\''
-                node = node.next_node
-        display_str = ', '.join(display_str.split())
+        display_str = ""
+        for _ in range(self._length):
+            if node.next_node is not None:
+                display_str += '{}, '.format(str(node.data))
+            else:
+                display_str += '{}'.format(str(node.data))
+            node = node.next_node
         return "({})".format(display_str)
 
     def __str__(self):

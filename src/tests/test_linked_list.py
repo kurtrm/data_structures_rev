@@ -154,4 +154,11 @@ def test_linked_list_display():
     """Our display list."""
     from ..linked_list import LinkedList
     new_list = LinkedList([1, 2, 3, 4])
-    assert new_list.display() == "('4', '3', '2', '1')"
+    assert new_list.display() == "(4, 3, 2, 1)"
+
+
+def test_linked_list_str():
+    """Ensure str calls display."""
+    from ..linked_list import LinkedList
+    new_list = LinkedList([1, 2, 3, 4, None, True, 'stringy'])
+    assert new_list.display() == str(new_list)
