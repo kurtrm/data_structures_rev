@@ -6,6 +6,13 @@ to these common data structures.
 
 Below summarizes the data structure. Complexity is the worst case scenario.
 
+
+To-do:
+- Test data-structures against existing implementations for robustness.
+- Implement additional data-structures.
+- Add CI.
+
+
 ## Linked List
 
 - __Parameters__:
