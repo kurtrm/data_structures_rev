@@ -1,6 +1,6 @@
 [run]
 source = 
-    src/
+    src/tests
 omit = 
     src/__init__.py
     src/tests/*
