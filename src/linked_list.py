@@ -1,7 +1,7 @@
 """Write an implementation of linked lists in Python."""
 
 
-class Node(object):
+class Node:
     """Node for use in a linked list."""
 
     def __init__(self, data, next_node=None):
@@ -10,7 +10,7 @@ class Node(object):
         self.next_node = next_node
 
 
-class LinkedList(object):
+class LinkedList:
     """Linked version of a list."""
 
     def __init__(self, iterable=None):
@@ -22,7 +22,7 @@ class LinkedList(object):
                 self.push(item)
             self._length = len(iterable)
         elif iterable is not None:
-            raise TypeError('Please give an iterable or don\'t type anything.')
+            raise TypeError('Acceptable arguments: str, list, tuple, None')
 
     def push(self, val):
         """Push the new value to the head of the linked list."""
@@ -34,7 +34,7 @@ class LinkedList(object):
         """Remove the head of the linked list."""
         if not self.head:
             raise IndexError(
-                'There\'s nothing to remove from the linked list.')
+                'Cannot pop from empty linked list.')
         popped = self.head
         self.head = self.head.next_node
         popped.next_node = None
