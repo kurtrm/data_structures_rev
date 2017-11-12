@@ -4,9 +4,12 @@ Repository to house both new and refactored versions of implemented data structu
 I've done some learning over the past few months, and I think it's already time to revisit approaches
 to these common data structures.
 
-# Linked List
+Below summarizes the data structure. Complexity is the worst case scenario.
 
-- Accepts an iterable as an optional parameter. 
+## Linked List
+
+- __Parameters__:
+    - Accepts an iterable as an optional parameter. 
 
 - __Attributes__:
     - head
@@ -18,5 +21,22 @@ to these common data structures.
     - search
     - remove
     - display(str interactive)
+
+- __Complexity__: O(n)
+
+## Stack
+
+A composition of a linked list that utilizes its pop and push methods.
+
+- __Parameters__:
+    - Takes an optional argument of any data type as the value of the node.
+
+- __Attributes__:
+    - No public attributes
+
+- __Methods__:
+    - push
+    - pop
+    - len interactive
 
 - __Complexity__: O(n)
