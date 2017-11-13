@@ -47,3 +47,23 @@ A composition of a linked list that utilizes its pop and push methods.
     - len interactive
 
 - __Complexity__: O(n)
+
+## Doubly Linked List
+
+- __Parameters__:
+    - Takes no arguments.
+
+- __Attributes__:
+    - tail
+    - head
+
+- __Methods__:
+    - push
+    - pop
+    - size(len interactive)
+    - shift
+    - append
+    - remove
+
+- __Complexity__: O(n)
+
