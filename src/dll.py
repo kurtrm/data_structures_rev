@@ -13,7 +13,7 @@ node.
 """
 
 
-class Node(object):
+class Node:
     """Node class for use in double linked list."""
 
     def __init__(self, data, next_node=None, prior_node=None):
@@ -23,7 +23,7 @@ class Node(object):
         self.prior_node = prior_node
 
 
-class DoubleLinkedList(object):
+class DoubleLinkedList:
     """Double linked version of a list."""
 
     def __init__(self):
