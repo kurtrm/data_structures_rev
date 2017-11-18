@@ -83,8 +83,8 @@ class DoubleLinkedList:
             self.tail = self.head = None
             return last_pop.data
         popped = self.head
-        self.head = self.head.prior_node
-        self.head.next_node = None
+        self.head = self.head.next_node
+        self.head.prior_node = None
         return popped.data
 
     def shift(self):
