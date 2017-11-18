@@ -37,21 +37,40 @@ class DoubleLinkedList:
         if self.tail is None and self.head is None:
             self.tail = self.head = Node(val)
         else:
-            new_node = Node(val, None, self.head)
-            self.head.next_node = new_node
+            new_node = Node(val, self.head)
+            self.head.prior_node = new_node
             self.head = new_node
         self._length += 1
 
     def append(self, val):
         """Append a val to the tail of a list."""
         if self.tail is None and self.head is None:
-            new_node = Node(val)
-            self.tail = self.head = new_node
+            self.tail = self.head = Node(val)
         else:
-            new_node = Node(val, self.tail, None)
-            self.tail.prior_node = new_node
+            new_node = Node(val, None, self.tail)
+            self.tail.next_node = new_node
             self.tail = new_node
         self._length += 1
+
+    def insert(self, side, val):
+        """
+        Append a val to either the head or the tail. Accepts
+        'tail' or 'head' as arguments to the side parameter.
+        """
+        if self.tail is None and self.head is None:
+            self.tail = self.head = Node(val)
+        else:
+            if side == 'tail':
+                new_node = Node(val, None, self.tail)
+                self.tail.next_node = new_node
+                self.tail = new_node
+            elif side == 'head':
+                new_node = Node(val, self.head)
+                self.head.prior_node = new_node
+                self.head = new_node
+            else:
+                raise ValueError("Side parameter accepts either 'end' or 'tail.'")
+            self._length += 1
 
     def pop(self):
         """Pop pops from the head of the list."""
