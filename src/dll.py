@@ -137,18 +137,17 @@ class DoubleLinkedList:
         """Remove a node with the value provided."""
         if self.head.data == val:
             self.pop()
-            return
         elif self.tail.data == val:
             self.shift()
-            return
-        current_node = self.head
-        while current_node is not None:
-            if current_node.data != val:
-                current_node = current_node.prior_node
-            else:
-                new_next_node = current_node.next_node
-                new_prior_node = current_node.prior_node
-                new_next_node.prior_node = new_prior_node
-                new_prior_node.next_node = new_next_node
-                self._length -= 1
-                break
+        else:
+            current_node = self.head
+            while current_node is not None:
+                if current_node.data != val:
+                    current_node = current_node.next_node
+                else:
+                    new_next_node = current_node.next_node
+                    new_prior_node = current_node.prior_node
+                    new_next_node.prior_node = new_prior_node
+                    new_prior_node.next_node = new_next_node
+                    self._length -= 1
+                    break
