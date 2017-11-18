@@ -115,7 +115,7 @@ def test_dll_remove_phase_two(dll):
     dll.remove(3)
     dll.remove(1)
     assert (dll.tail.data,
-            dll.tail.next_node.data) == (2, 4)
+            dll.tail.prior_node.data) == (2, 4)
 
 
 def test_dll_remove_phase_three(dll):
