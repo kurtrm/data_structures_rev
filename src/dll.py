@@ -102,6 +102,31 @@ class DoubleLinkedList:
         self.tail.next_node = None
         return shifted.data
 
+    def snip(self, side):
+        """
+        Remove and return either the head or the tail.
+        Like insert, accepts 'tail' or 'head'.
+        """
+        if not self.tail:
+            raise IndexError(
+                'There\'s nothing to remove from the linked list.')
+        if self.head == self.tail:
+            snipped = self.head
+            self.tail = self.head = None
+        else:
+            if side == 'tail':
+                snipped = self.tail
+                self.tail = self.tail.prior_node
+                self.tail.next_node = None
+            elif side == 'head':
+                snipped = self.head
+                self.head = self.head.next_node
+                self.head.prior_node = None
+            else:
+                raise ValueError("Side parameter accepts either 'end' or 'tail.'")
+        self._length -= 1
+        return snipped.data
+
     def size(self):
         """Return the length of the double linked list."""
         return self._length
