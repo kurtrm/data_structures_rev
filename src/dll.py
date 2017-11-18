@@ -98,8 +98,8 @@ class DoubleLinkedList:
             self.tail = self.head = None
             return last_pop.data
         shifted = self.tail
-        self.tail = self.tail.next_node
-        self.tail.prior_node = None
+        self.tail = self.tail.prior_node
+        self.tail.next_node = None
         return shifted.data
 
     def size(self):
