@@ -33,9 +33,9 @@ def test_dll_push_3(dll):
     dll.push(1)
     dll.push(2)
     dll.push(3)
-    assert (dll.tail.data, dll.head.prior_node.prior_node.data,
-            dll.head != dll.head.prior_node, dll.head.data, dll.head.prior_node.next_node.data,
-            dll.tail.next_node.data) == (1, 1, True, 3, 3, 2)
+    assert (dll.tail.data, dll.head.next_node.next_node.data,
+            dll.head != dll.head.next_node, dll.head.data, dll.head.next_node.prior_node.data,
+            dll.tail.prior_node.data) == (1, 1, True, 3, 3, 2)
 
 
 def test_dll_pop_index_error(dll):
@@ -71,10 +71,10 @@ def test_dll_appends_3_values(dll):
     dll.append(1)
     dll.append(2)
     dll.append(3)
-    assert (dll.tail.data, dll.head.data, dll.head.next_node,
-            dll.tail.prior_node, dll.tail.next_node.data,
-            dll.head.prior_node.data, dll.head.prior_node.next_node.data,
-            dll.tail.next_node.prior_node.data) == (3, 1, None,
+    assert (dll.tail.data, dll.head.data, dll.head.prior_node,
+            dll.tail.next_node, dll.tail.prior_node.data,
+            dll.head.next_node.data, dll.head.next_node.prior_node.data,
+            dll.tail.prior_node.next_node.data) == (3, 1, None,
                                                     None, 2, 2,
                                                     1, 3)
 
