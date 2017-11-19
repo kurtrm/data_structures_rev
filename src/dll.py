@@ -37,21 +37,40 @@ class DoubleLinkedList:
         if self.tail is None and self.head is None:
             self.tail = self.head = Node(val)
         else:
-            new_node = Node(val, None, self.head)
-            self.head.next_node = new_node
+            new_node = Node(val, self.head)
+            self.head.prior_node = new_node
             self.head = new_node
         self._length += 1
 
     def append(self, val):
         """Append a val to the tail of a list."""
         if self.tail is None and self.head is None:
-            new_node = Node(val)
-            self.tail = self.head = new_node
+            self.tail = self.head = Node(val)
         else:
-            new_node = Node(val, self.tail, None)
-            self.tail.prior_node = new_node
+            new_node = Node(val, None, self.tail)
+            self.tail.next_node = new_node
             self.tail = new_node
         self._length += 1
+
+    def insert(self, side, val):
+        """
+        Append a val to either the head or the tail. Accepts
+        'tail' or 'head' as arguments to the side parameter.
+        """
+        if self.tail is None and self.head is None and side in ['head', 'tail']:
+            self.tail = self.head = Node(val)
+        else:
+            if side == 'tail':
+                new_node = Node(val, None, self.tail)
+                self.tail.next_node = new_node
+                self.tail = new_node
+            elif side == 'head':
+                new_node = Node(val, self.head)
+                self.head.prior_node = new_node
+                self.head = new_node
+            else:
+                raise ValueError("Side parameter accepts either 'end' or 'tail.'")
+            self._length += 1
 
     def pop(self):
         """Pop pops from the head of the list."""
@@ -64,8 +83,8 @@ class DoubleLinkedList:
             self.tail = self.head = None
             return last_pop.data
         popped = self.head
-        self.head = self.head.prior_node
-        self.head.next_node = None
+        self.head = self.head.next_node
+        self.head.prior_node = None
         return popped.data
 
     def shift(self):
@@ -79,9 +98,34 @@ class DoubleLinkedList:
             self.tail = self.head = None
             return last_pop.data
         shifted = self.tail
-        self.tail = self.tail.next_node
-        self.tail.prior_node = None
+        self.tail = self.tail.prior_node
+        self.tail.next_node = None
         return shifted.data
+
+    def snip(self, side):
+        """
+        Remove and return either the head or the tail.
+        Like insert, accepts 'tail' or 'head'.
+        """
+        if not self.tail:
+            raise IndexError(
+                'There\'s nothing to remove from the linked list.')
+        if self.head == self.tail and side in ['tail', 'head']:
+            snipped = self.head
+            self.tail = self.head = None
+        else:
+            if side == 'tail':
+                snipped = self.tail
+                self.tail = self.tail.prior_node
+                self.tail.next_node = None
+            elif side == 'head':
+                snipped = self.head
+                self.head = self.head.next_node
+                self.head.prior_node = None
+            else:
+                raise ValueError("Side parameter accepts either 'end' or 'tail.'")
+        self._length -= 1
+        return snipped.data
 
     def size(self):
         """Return the length of the double linked list."""
@@ -93,18 +137,17 @@ class DoubleLinkedList:
         """Remove a node with the value provided."""
         if self.head.data == val:
             self.pop()
-            return
         elif self.tail.data == val:
             self.shift()
-            return
-        current_node = self.head
-        while current_node is not None:
-            if current_node.data != val:
-                current_node = current_node.prior_node
-            else:
-                new_next_node = current_node.next_node
-                new_prior_node = current_node.prior_node
-                new_next_node.prior_node = new_prior_node
-                new_prior_node.next_node = new_next_node
-                self._length -= 1
-                break
+        else:
+            current_node = self.head
+            while current_node is not None:
+                if current_node.data != val:
+                    current_node = current_node.next_node
+                else:
+                    new_next_node = current_node.next_node
+                    new_prior_node = current_node.prior_node
+                    new_next_node.prior_node = new_prior_node
+                    new_prior_node.next_node = new_next_node
+                    self._length -= 1
+                    break

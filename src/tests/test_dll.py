@@ -33,15 +33,91 @@ def test_dll_push_3(dll):
     dll.push(1)
     dll.push(2)
     dll.push(3)
-    assert (dll.tail.data, dll.head.prior_node.prior_node.data,
-            dll.head != dll.head.prior_node, dll.head.data, dll.head.prior_node.next_node.data,
-            dll.tail.next_node.data) == (1, 1, True, 3, 3, 2)
+    assert (dll.tail.data, dll.head.next_node.next_node.data,
+            dll.head != dll.head.next_node, dll.head.data, dll.head.next_node.prior_node.data,
+            dll.tail.prior_node.data) == (1, 1, True, 3, 3, 2)
+
+
+def test_insert_one_head(dll):
+    """Test one node is tail and head."""
+    dll.insert('head', False)
+    assert dll.head == dll.tail
+
+
+def test_insert_one_tail(dll):
+    """Test one node is tail and head."""
+    dll.insert('tail', True)
+    assert dll.head == dll.tail
+
+
+def test_insert_multiple_head(dll):
+    """Test inserting one to multiple."""
+    dll.insert('head', "weep")
+    dll.insert('head', 'spire')
+    assert (dll.head.data, dll.tail.data) == ('spire', 'weep')
+
+
+def test_insert_multiple_tail(dll):
+    """Test inserting one to multiple."""
+    dll.insert('tail', "weep")
+    dll.insert('tail', 'spire')
+    assert (dll.head.data, dll.tail.data) == ('weep', 'spire')
+
+
+def test_insert_val_erro(dll):
+    """Test hat we get appropriate val erro."""
+    with pytest.raises(ValueError):
+        dll.insert('wipe', 'wip')
 
 
 def test_dll_pop_index_error(dll):
     """Test that the Index Error is raised if no val is popped."""
     with pytest.raises(IndexError):
         dll.pop()
+
+
+def test_snip_pop_index_error(dll):
+    """Test of snip to get index error."""
+    with pytest.raises(IndexError):
+        dll.snip('tail')
+
+
+def test_snip_shift_index_error(dll):
+    """test that we get snip index error."""
+    with pytest.raises(IndexError):
+        dll.snip('head')
+
+
+def test_snip_one_node(dll):
+    """Test that head and tail are none and get correct val."""
+    dll.append(3)
+    popped = dll.snip('head')
+    assert (popped, dll.head, dll.tail) == (3, None, None)
+
+
+def test_snip_multiple_pop(dll):
+    """Test works correctly for both ends."""
+    dll.push(1)
+    dll.push(3)
+    dll.push('True')
+    for val in [1, 3, 'True']:
+        assert dll.snip('tail') == val
+
+
+def test_snip_multiple_shift(dll):
+    """Test works correctly for both ends."""
+    dll.append(1)
+    dll.append(3)
+    dll.append('True')
+    for val in [1, 3, 'True']:
+        assert dll.snip('head') == val
+
+
+def test_snip_val_error(dll):
+    """Test that we get value error."""
+    dll.push(True)
+    with pytest.raises(ValueError):
+        dll.snip('booger')
 
 
 def test_dll_pop_only_has_one_item_phase_one(dll):
@@ -71,10 +147,10 @@ def test_dll_appends_3_values(dll):
     dll.append(1)
     dll.append(2)
     dll.append(3)
-    assert (dll.tail.data, dll.head.data, dll.head.next_node,
-            dll.tail.prior_node, dll.tail.next_node.data,
-            dll.head.prior_node.data, dll.head.prior_node.next_node.data,
-            dll.tail.next_node.prior_node.data) == (3, 1, None,
+    assert (dll.tail.data, dll.head.data, dll.head.prior_node,
+            dll.tail.next_node, dll.tail.prior_node.data,
+            dll.head.next_node.data, dll.head.next_node.prior_node.data,
+            dll.tail.prior_node.next_node.data) == (3, 1, None,
                                                     None, 2, 2,
                                                     1, 3)
 
@@ -102,8 +178,8 @@ def test_dll_remove_phase_one(dll):
     dll.push(3)
     dll.push(4)
     dll.remove(3)
-    assert (dll.head.prior_node.data,
-            dll.head.prior_node.next_node.data) == (2, 4)
+    assert (dll.head.next_node.data,
+            dll.head.next_node.prior_node.data) == (2, 4)
 
 
 def test_dll_remove_phase_two(dll):
@@ -115,7 +191,7 @@ def test_dll_remove_phase_two(dll):
     dll.remove(3)
     dll.remove(1)
     assert (dll.tail.data,
-            dll.tail.next_node.data) == (2, 4)
+            dll.tail.prior_node.data) == (2, 4)
 
 
 def test_dll_remove_phase_three(dll):
@@ -152,3 +228,7 @@ def test_dll_shift(dll):
     """Test index error when shifting from empty list."""
     with pytest.raises(IndexError):
         dll.shift()
+
+def test_snip(dll):
+    """Test the dry version of pop and shift."""
+
