@@ -54,14 +54,14 @@ def test_insert_multiple_head(dll):
     """Test inserting one to multiple."""
     dll.insert('head', "weep")
     dll.insert('head', 'spire')
-    assert (dll.head, dll.tail) == ('spire', 'weeps')
+    assert (dll.head.data, dll.tail.data) == ('spire', 'weep')
 
 
 def test_insert_multiple_tail(dll):
     """Test inserting one to multiple."""
     dll.insert('tail', "weep")
     dll.insert('tail', 'spire')
-    assert (dll.head, dll.tail) == ('spire', 'weeps')
+    assert (dll.head.data, dll.tail.data) == ('weep', 'spire')
 
 
 def test_dll_pop_index_error(dll):
