@@ -38,6 +38,18 @@ def test_dll_push_3(dll):
             dll.tail.prior_node.data) == (1, 1, True, 3, 3, 2)
 
 
+def test_insert_one_head(dll):
+    """Test one node is tail and head."""
+    dll.insert('head', False)
+    assert dll.head == dll.tail
+
+
+def test_insert_one_tail(dll):
+    """Test one node is tail and head."""
+    dll.insert('tail', True)
+    assert dll.head == dll.tail
+
+
 def test_dll_pop_index_error(dll):
     """Test that the Index Error is raised if no val is popped."""
     with pytest.raises(IndexError):

@@ -57,7 +57,7 @@ class DoubleLinkedList:
         Append a val to either the head or the tail. Accepts
         'tail' or 'head' as arguments to the side parameter.
         """
-        if self.tail is None and self.head is None:
+        if self.tail is None and self.head is None and side in ['head', 'tail']:
             self.tail = self.head = Node(val)
         else:
             if side == 'tail':
