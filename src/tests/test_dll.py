@@ -44,6 +44,26 @@ def test_dll_pop_index_error(dll):
         dll.pop()
 
 
+def test_snip_pop_index_error(dll):
+    """Test of snip to get index error."""
+    with pytest.raises(IndexError):
+        dll.snip('tail')
+
+
+def test_snip_shift_index_error(dll):
+    """test that we get snip index error."""
+    with pytest.raises(IndexError):
+        dll.snip('head')
+
+
+def test_snip_one_node(dll):
+    """Test that head and tail are none and get correct val."""
+    dll.append(3)
+    popped = dll.snip('head')
+    assert (3, dll.head, dll.tail) == (3, None, None)
+
+
+
 def test_dll_pop_only_has_one_item_phase_one(dll):
     """Test that pop only has one item and both are head and tail none vals."""
     dll.push(1)
@@ -152,3 +172,7 @@ def test_dll_shift(dll):
     """Test index error when shifting from empty list."""
     with pytest.raises(IndexError):
         dll.shift()
+
+def test_snip(dll):
+    """Test the dry version of pop and shift."""
+
