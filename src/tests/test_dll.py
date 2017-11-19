@@ -63,14 +63,29 @@ def test_snip_one_node(dll):
     assert (popped, dll.head, dll.tail) == (3, None, None)
 
 
-def test_snip_multiple(dll):
+def test_snip_multiple_pop(dll):
     """Test works correctly for both ends."""
     dll.push(1)
     dll.push(3)
     dll.push('True')
-    for val in ['True', 3, 1]:
+    for val in [1, 3, 'True']:
         assert dll.snip('tail') == val
 
+
+def test_snip_multiple_shift(dll):
+    """Test works correctly for both ends."""
+    dll.append(1)
+    dll.append(3)
+    dll.append('True')
+    for val in [1, 3, 'True']:
+        assert dll.snip('head') == val
+
+
+def test_snip_val_error(dll):
+    """Test that we get value error."""
+    dll.push(True)
+    with pytest.raises(ValueError):
+        dll.snip('booger')
 
 
 def test_dll_pop_only_has_one_item_phase_one(dll):

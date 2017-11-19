@@ -110,7 +110,7 @@ class DoubleLinkedList:
         if not self.tail:
             raise IndexError(
                 'There\'s nothing to remove from the linked list.')
-        if self.head == self.tail:
+        if self.head == self.tail and side in ['tail', 'head']:
             snipped = self.head
             self.tail = self.head = None
         else:
