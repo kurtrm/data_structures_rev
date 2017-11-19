@@ -64,6 +64,12 @@ def test_insert_multiple_tail(dll):
     assert (dll.head.data, dll.tail.data) == ('weep', 'spire')
 
 
+def test_insert_val_erro(dll):
+    """Test hat we get appropriate val erro."""
+    with pytest.raises(ValueError):
+        dll.insert('wipe', 'wip')
+
+
 def test_dll_pop_index_error(dll):
     """Test that the Index Error is raised if no val is popped."""
     with pytest.raises(IndexError):
