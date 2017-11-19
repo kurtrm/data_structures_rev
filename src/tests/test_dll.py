@@ -50,6 +50,20 @@ def test_insert_one_tail(dll):
     assert dll.head == dll.tail
 
 
+def test_insert_multiple_head(dll):
+    """Test inserting one to multiple."""
+    dll.insert('head', "weep")
+    dll.insert('head', 'spire')
+    assert (dll.head, dll.tail) == ('spire', 'weeps')
+
+
+def test_insert_multiple_tail(dll):
+    """Test inserting one to multiple."""
+    dll.insert('tail', "weep")
+    dll.insert('tail', 'spire')
+    assert (dll.head, dll.tail) == ('spire', 'weeps')
+
+
 def test_dll_pop_index_error(dll):
     """Test that the Index Error is raised if no val is popped."""
     with pytest.raises(IndexError):
