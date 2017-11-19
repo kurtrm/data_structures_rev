@@ -60,7 +60,16 @@ def test_snip_one_node(dll):
     """Test that head and tail are none and get correct val."""
     dll.append(3)
     popped = dll.snip('head')
-    assert (3, dll.head, dll.tail) == (3, None, None)
+    assert (popped, dll.head, dll.tail) == (3, None, None)
+
+
+def test_snip_multiple(dll):
+    """Test works correctly for both ends."""
+    dll.push(1)
+    dll.push(3)
+    dll.push('True')
+    for val in ['True', 3, 1]:
+        assert dll.snip('tail') == val
 
 
 
