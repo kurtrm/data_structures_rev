@@ -80,6 +80,14 @@ def test_the_queue_size(the_queue):
     assert the_queue.size() == 3
 
 
+def test_the_queue_size(the_queue):
+    """Test the length on the queue."""
+    the_queue.enqueue(1)
+    the_queue.enqueue(2)
+    the_queue.enqueue(3)
+    assert the_queue.size() == len(the_queue)
+
+
 def test_size_empty(the_queue):
     """Test zero is returned if empty."""
     assert the_queue.size() == 0

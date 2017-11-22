@@ -77,15 +77,12 @@ A composition of a linked list that utilizes its pop and push methods.
     - Takes no arguments.
 
 - __Attributes__:
-    - tail
-    - head
+    - No attributes.
 
 - __Methods__:
-    - push
-    - pop
-    - size(len interactive)
-    - shift
-    - append
-    - remove
+    - enqueue
+    - dequeue
+    - peek
+    - size
 
 - __Complexity__: O(n)
