@@ -11,6 +11,10 @@ To-do:
 - Test data-structures against existing implementations for robustness.
 - Implement additional data-structures.
 - Add CI.
+- Incorporate the following where possible:
+    - try/except
+    - namedtuples
+    - generators
 
 
 ## Linked List
@@ -67,3 +71,18 @@ A composition of a linked list that utilizes its pop and push methods.
 
 - __Complexity__: O(n)
 
+## Queue
+
+- __Parameters__:
+    - Takes no arguments.
+
+- __Attributes__:
+    - No attributes.
+
+- __Methods__:
+    - enqueue
+    - dequeue
+    - peek
+    - size
+
+- __Complexity__: O(n)

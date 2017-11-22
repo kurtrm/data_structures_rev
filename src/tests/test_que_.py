@@ -1,5 +1,7 @@
 """Our test file for our queue."""
 import pytest
+import io
+import sys
 
 
 @pytest.fixture
@@ -78,6 +80,26 @@ def test_the_queue_size(the_queue):
     assert the_queue.size() == 3
 
 
+def test_the_queue_size(the_queue):
+    """Test the length on the queue."""
+    the_queue.enqueue(1)
+    the_queue.enqueue(2)
+    the_queue.enqueue(3)
+    assert the_queue.size() == len(the_queue)
+
+
 def test_size_empty(the_queue):
     """Test zero is returned if empty."""
     assert the_queue.size() == 0
+
+
+def test_peek(the_queue):
+    """Test that we get correct statement."""
+    the_queue.enqueue(1)
+    the_queue.enqueue(2)
+    the_queue.enqueue(3)
+    output = io.StringIO()
+    sys.stdout = output
+    the_queue.peek()
+    sys.stdout = sys.__stdout__
+    assert the_queue._dll.tail.data == int(output.getvalue())
