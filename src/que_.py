@@ -2,7 +2,7 @@
 from .dll import DoubleLinkedList
 
 
-class Queue(object):
+class Queue:
     """Class Queue for enqueue and dequeue data structure."""
 
     def __init__(self):

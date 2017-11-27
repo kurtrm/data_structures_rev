@@ -86,3 +86,23 @@ A composition of a linked list that utilizes its pop and push methods.
     - size
 
 - __Complexity__: O(n)
+
+
+## Dequeue
+
+- __Parameters__:
+    - Takes no arguments.
+
+- __Attributes__:
+    - No attributes.
+
+- __Methods__:
+    - append
+    - appendleft
+    - pop
+    - popleft
+    - peek
+    - peekleft
+    - size (len interactive)
+
+- __Complexity__: O(n)
