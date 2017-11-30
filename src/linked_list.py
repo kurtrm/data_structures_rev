@@ -61,10 +61,12 @@ class LinkedList:
         """Search the nodes for the value provided."""
         if not current_node:
             current_node = self.head
+
         if val == current_node.data:
             return current_node.data
-        else:
-            self.search(val, current_node.next_node)
+        elif current_node.next_node is None:
+            return
+        return self.search(val, current_node.next_node)
 
     def remove(self, val):
         """Remove node from anywhere in the linked list with the val."""
