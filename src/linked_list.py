@@ -49,13 +49,22 @@ class LinkedList:
         """Interact with built-in len() function."""
         return self.size()
 
-    def search(self, val):
+    # def search(self, val):
+    #     """Search the nodes for the value provided."""
+    #     current_node = self.head
+    #     while current_node is not None:
+    #         if current_node.data == val:
+    #             return current_node.data
+    #         current_node = current_node.next_node
+
+    def search(self, val, current_node=None):
         """Search the nodes for the value provided."""
-        current_node = self.head
-        while current_node is not None:
-            if current_node.data == val:
-                return current_node.data
-            current_node = current_node.next_node
+        if not current_node:
+            current_node = self.head
+        if val == current_node.data:
+            return current_node.data
+        else:
+            self.search(val, current_node.next_node)
 
     def remove(self, val):
         """Remove node from anywhere in the linked list with the val."""
