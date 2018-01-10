@@ -6,10 +6,10 @@ from cases import TEST_CASES
 from importlib import import_module
 
 
-IN_PLACE = True
-STABLE = True
-MODULENAME = 'bubble_sort'
-FUNCNAME = 'bubble_sort'
+IN_PLACE = False
+STABLE = False
+MODULENAME = 'merge'
+FUNCNAME = 'merge_sort'
 
 
 module = import_module(MODULENAME)
