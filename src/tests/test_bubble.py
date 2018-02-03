@@ -22,7 +22,7 @@ def test_bubble_non_list_raises_error():
 def test_bubble_non_int_raises_error():
     """Entering an iterable containing non-integers raises an error."""
     from ..bubble import bubble_sort
-    with pytest.raises(ValueError):
+    with pytest.raises(TypeError):
         bubble_sort([1, 2, 3, 5, 'burp'])
 
 
