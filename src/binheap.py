@@ -1,4 +1,5 @@
 """Binary Min Heap."""
+from Typing import Iterable, Union
 
 
 class BinHeap:
@@ -14,7 +15,7 @@ class BinHeap:
             else:
                 raise ValueError('Argument must be an iterable')
 
-    def heapify(self, iterable):
+    def heapify(self, iterable: list) -> list:
         """Function that will be used in init and other methods."""
         for item in iterable[::-1]:
             idx = iterable.index(item)
@@ -26,15 +27,15 @@ class BinHeap:
 
         return iterable
 
-    def push(self, val):
+    def push(self, val: Union[int, float]) -> None:
         """Push a value onto the heap."""
-        if not isinstance(val, int):
+        if not isinstance(val, (int, float)):
             raise TypeError(
-                'push() takes one argument, none provided')
+                'Argument must be an integer or float')
         self._iterable.append(val)
         self._iterable = self.heapify(self._iterable)
 
-    def pop(self):
+    def pop(self) -> None:
         """Pop the min value from the heap, return it, and resort the heap."""
         if len(self._iterable) == 0:
             raise TypeError(
