@@ -1,11 +1,11 @@
 """Binary Min Heap."""
-from Typing import Iterable, Union
+from typing import Iterable, Union
 
 
 class BinHeap:
     """Min Heap Data Structure."""
 
-    def __init__(self, iterable=None) -> None:
+    def __init__(self, iterable: Union[None, Iterable]=None) -> None:
         """Initialize an empty min heap."""
         try:
             self._iterable = self.heapify(iterable)
@@ -39,8 +39,9 @@ class BinHeap:
         """Pop the min value from the heap, return it, and resort the heap."""
         popped = self._iterable.pop(0)
         self.heapify(self._iterable)
+
         return popped
 
-    def __len__(self):
+    def __len__(self) -> int:
         """Return length of the binary heap."""
         return len(self._iterable)

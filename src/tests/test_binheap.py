@@ -65,7 +65,7 @@ def test_len(full_heap):
 
 def test_empty_heap_pop(empty_heap):
     """Test that the heap won't let you pop if it's empty."""
-    with pytest.raises(TypeError):
+    with pytest.raises(IndexError):
         empty_heap.pop()
 
 
