@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 import pytest
 import random
-from tests.cases import TEST_CASES
+from .cases import TEST_CASES
 from importlib import import_module
 
 
