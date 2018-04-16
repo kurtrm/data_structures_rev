@@ -6,7 +6,7 @@ import random
 @pytest.fixture
 def empty_heap():
     """Instantiate a heap for testing."""
-    from binheap import BinHeap
+    from ..binheap import BinHeap
     min_heap = BinHeap()
     return min_heap
 
@@ -14,7 +14,7 @@ def empty_heap():
 @pytest.fixture
 def random_heap():
     """Generate a list for use in a heap."""
-    from binheap import BinHeap
+    from ..binheap import BinHeap
     iterable = list(
         set(
             [random.randint(0, 200) for _ in range(random.randrange(500))]
@@ -27,27 +27,27 @@ def random_heap():
 @pytest.fixture
 def full_heap():
     """Instantiate a heap from a list for testing."""
-    from binheap import BinHeap
+    from ..binheap import BinHeap
     min_heap = BinHeap([67, 5, 32, 1, 0, 2, 4, 101, 94, 72])
     return min_heap
 
 
 def test_heap_initialization_empty_heap(empty_heap):
     """Test that there's nothing initialized."""
-    from binheap import BinHeap
+    from ..binheap import BinHeap
     assert isinstance(empty_heap, BinHeap)
 
 
 def test_heap_type_error():
     """Ensure TypeError if we pass anything but a list or None."""
-    from binheap import BinHeap
+    from ..binheap import BinHeap
     with pytest.raises(TypeError):
         test_heap = BinHeap(1, 2, 3, 4)
 
 
 def test_heap_initialized_with_list(full_heap):
     """Test that there's stuff in there."""
-    from binheap import BinHeap
+    from ..binheap import BinHeap
     assert isinstance(full_heap, BinHeap)
     assert full_heap._iterable == [0, 1, 4, 2, 5, 67, 32, 101, 94, 72]
 

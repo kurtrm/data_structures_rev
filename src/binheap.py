@@ -4,7 +4,7 @@
 class BinHeap:
     """Min Heap Data Structure."""
 
-    def __init__(self, iterable=None):
+    def __init__(self, iterable=None) -> None:
         """Initialize an empty min heap."""
         try:
             self._iterable = self.heapify(iterable)
@@ -16,20 +16,15 @@ class BinHeap:
 
     def heapify(self, iterable):
         """Function that will be used in init and other methods."""
-        heap_list = iterable
-        for item in heap_list[::-1]:
-            item_index = heap_list.index(item)
-            parent = (item_index - 1) // 2
-            while item_index > 0:
-                if heap_list[item_index] < heap_list[parent]:
-                    curr_val = heap_list[parent]
-                    heap_list[parent] = heap_list[item_index]
-                    heap_list[item_index] = curr_val
-                    item_index = parent
-                    parent = (item_index - 1) // 2
-                else:
-                    break
-        return heap_list
+        for item in iterable[::-1]:
+            idx = iterable.index(item)
+            parent = (idx - 1) // 2
+            while idx > 0 and iterable[idx] < iterable[parent]:
+                iterable[parent], iterable[idx] = iterable[idx], iterable[parent]
+                idx = parent
+                parent = (idx - 1) // 2
+
+        return iterable
 
     def push(self, val):
         """Push a value onto the heap."""
