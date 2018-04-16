@@ -7,7 +7,7 @@ import pytest
 @pytest.fixture
 def linked_list():
     """Instantiate a  for testing."""
-    from ..linked_list import LinkedList
+    from src.linked_list import LinkedList
     linked_list = LinkedList()
     return linked_list
 
@@ -45,14 +45,14 @@ def test_linked_list_head(linked_list):
 
 def test_iterable_linked_list():
     """Test values of initialized linked list."""
-    from ..linked_list import LinkedList
+    from src.linked_list import LinkedList
     linked_list = LinkedList([1, 2, 3])
     assert (len(linked_list), linked_list.head.data) == (3, 3)
 
 
 def test_iterable_linked_list_exception():
     """Ensure exception raised if a non-iterable is passed as argument."""
-    from ..linked_list import LinkedList
+    from src.linked_list import LinkedList
     with pytest.raises(TypeError):
         new_link = LinkedList(1)
 
@@ -90,7 +90,7 @@ def test_linked_list_popped_exception(linked_list):
 
 def test_linked_list_search(linked_list):
     """Test the linked list search method."""
-    from ..linked_list import LinkedList
+    from src.linked_list import LinkedList
     obj_1 = 'apple'
     obj_2 = 45
     obj_3 = ['stringy']
@@ -103,7 +103,7 @@ def test_linked_list_search(linked_list):
 
 def test_linked_list_remove_phase_one():
     """Test proper remove functionality."""
-    from ..linked_list import LinkedList
+    from src.linked_list import LinkedList
     new_list = LinkedList([1, 2, 3, 4])
     new_list.remove(1)
     assert new_list.search(1) is None
@@ -111,7 +111,7 @@ def test_linked_list_remove_phase_one():
 
 def test_linked_list_remove_phase_two():
     """Test proper remove functionality."""
-    from ..linked_list import LinkedList
+    from src.linked_list import LinkedList
     new_list = LinkedList([1, 2, 3, 4])
     new_list.remove(1)
     new_list.remove(4)
@@ -121,7 +121,7 @@ def test_linked_list_remove_phase_two():
 
 def test_linked_list_remove_phase_three():
     """Test proper remove functionality."""
-    from ..linked_list import LinkedList
+    from src.linked_list import LinkedList
     new_list = LinkedList([1, 2, 3, 4])
     new_list.remove(1)
     new_list.remove(4)
@@ -133,7 +133,7 @@ def test_linked_list_remove_phase_three():
 
 def test_linked_list_remove_phase_three_len():
     """Test proper remove functionality."""
-    from ..linked_list import LinkedList
+    from src.linked_list import LinkedList
     new_list = LinkedList([1, 2, 3, 4])
     new_list.remove(1)
     new_list.remove(4)
@@ -144,7 +144,7 @@ def test_linked_list_remove_phase_three_len():
 
 def test_linked_list_remove_exception():
     """Test raises exception if value can't be removed."""
-    from ..linked_list import LinkedList
+    from src.linked_list import LinkedList
     new_linked_list = LinkedList((1, 'Trip', True))
     with pytest.raises(ValueError):
         new_linked_list.remove('this')
@@ -152,13 +152,13 @@ def test_linked_list_remove_exception():
 
 def test_linked_list_display():
     """Our display list."""
-    from ..linked_list import LinkedList
+    from src.linked_list import LinkedList
     new_list = LinkedList([1, 2, 3, 4])
     assert new_list.display() == "(4, 3, 2, 1)"
 
 
 def test_linked_list_str():
     """Ensure str calls display."""
-    from ..linked_list import LinkedList
+    from src.linked_list import LinkedList
     new_list = LinkedList([1, 2, 3, 4, None, True, 'stringy'])
     assert new_list.display() == str(new_list)

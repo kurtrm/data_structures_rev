@@ -5,7 +5,7 @@ import pytest
 @pytest.fixture
 def dll():
     """Instantiate a dll for testing."""
-    from ..dll import DoubleLinkedList
+    from src.dll import DoubleLinkedList
     double_link = DoubleLinkedList()
     return double_link
 

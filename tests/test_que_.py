@@ -7,7 +7,7 @@ import sys
 @pytest.fixture
 def the_queue():
     """Queue fixture."""
-    from ..que_ import Queue
+    from src.que_ import Queue
     the_queue = Queue()
     return the_queue
 
