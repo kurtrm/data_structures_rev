@@ -8,7 +8,7 @@ from importlib import import_module
 
 IN_PLACE = False
 STABLE = False
-MODULENAME = '.merge'
+MODULENAME = 'merge'
 FUNCNAME = 'merge_sort'
 
 
