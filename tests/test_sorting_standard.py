@@ -12,7 +12,7 @@ MODULENAME = 'merge'
 FUNCNAME = 'merge_sort'
 
 
-module = import_module(MODULENAME)
+module = import_module(MODULENAME, 'src')
 funcdef = getattr(module, FUNCNAME)
 
 
