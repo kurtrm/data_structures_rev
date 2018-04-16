@@ -8,7 +8,6 @@ prompt-toolkit==1.0.15
 ptyprocess==0.5.2
 py==1.4.34
 Pygments==2.2.0
-pyspark==2.3.0
 pytest==3.2.3
 pytest-cov==2.5.1
 simplegeneric==0.8.1
