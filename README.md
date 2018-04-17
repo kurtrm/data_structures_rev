@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/kurtrm/data_structures_rev.svg?branch=master)](https://travis-ci.org/kurtrm/data_structures_rev)
+
 # Revised Data Structures
 Repository to house both new and refactored versions of implemented data structures.
 
