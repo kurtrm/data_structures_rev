@@ -2,17 +2,17 @@
 from __future__ import unicode_literals
 import pytest
 import random
-from cases import TEST_CASES
+from .cases import TEST_CASES
 from importlib import import_module
 
 
 IN_PLACE = False
 STABLE = False
-MODULENAME = 'merge'
+MODULENAME = 'src.merge'
 FUNCNAME = 'merge_sort'
 
 
-module = import_module(MODULENAME)
+module = import_module(MODULENAME, '..')
 funcdef = getattr(module, FUNCNAME)
 
 

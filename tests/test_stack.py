@@ -5,14 +5,14 @@ import pytest
 @pytest.fixture
 def the_stack():
     """Stack fixture."""
-    from ..stack import Stack
+    from src.stack import Stack
     the_stack = Stack([1, 2, 3, 4])
     return the_stack
 
 
 def test_instantiation(the_stack):
     """Test instantiation of the stack."""
-    from ..stack import Stack
+    from src.stack import Stack
     assert (len(the_stack),
             isinstance(the_stack, Stack)) == (4, True)
 
@@ -31,7 +31,7 @@ def test_stack_pop(the_stack):
 
 def test_stack_pop_except_error():
     """Test for pop exception error and should get index errror."""
-    from ..stack import Stack
+    from src.stack import Stack
     empty_stack = Stack()
     with pytest.raises(IndexError):
         empty_stack.pop()

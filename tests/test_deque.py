@@ -5,7 +5,7 @@ import pytest
 @pytest.fixture
 def the_deque():
     """Queue fixture."""
-    from ..deque import Deque
+    from src.deque import Deque
     the_deque = Deque()
     return the_deque
 
