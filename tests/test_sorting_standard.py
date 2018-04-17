@@ -8,11 +8,11 @@ from importlib import import_module
 
 IN_PLACE = False
 STABLE = False
-MODULENAME = 'merge'
+MODULENAME = 'src.merge'
 FUNCNAME = 'merge_sort'
 
 
-module = import_module(MODULENAME, 'src')
+module = import_module(MODULENAME, '..')
 funcdef = getattr(module, FUNCNAME)
 
 

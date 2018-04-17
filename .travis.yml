@@ -9,7 +9,9 @@ install:
   - pip install coveralls
   - pip install python-coveralls
 # command to run tests
+before_script:
+  - cd tests
 script: 
-  - pytest tests --cov=src
+  - pytest . --cov=src
 after_success:
   - coveralls
