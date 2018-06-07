@@ -10,7 +10,7 @@ list_words = words.split('\n')
 @pytest.fixture
 def test_trie():
     """Trie tree for testing."""
-    from trie import Trie
+    from src.trie import Trie
     return Trie()
 
 
@@ -70,6 +70,15 @@ def test_remove_method_short(test_trie):
     assert not test_trie.contains('test')
 
 
+def test_contains_special_method(test_trie):
+    """Test that the special method works correctly."""
+    test_trie.insert('test')
+    test_trie.insert('tests')
+    test_trie.insert('art')
+    assert 'test' in test_trie
+    assert 'testy' not in test_trie
+
+
 def test_traversal(test_trie):
     """Test the traversal method."""
     test_trie.insert('star')
@@ -118,24 +127,6 @@ def test_insert_not_string(test_trie):
         test_trie.insert(2)
 
 
-def test_insert_empty_string(test_trie):
-    """Test it won't accept empty string."""
-    with pytest.raises(ValueError):
-        test_trie.insert('')
-
-
-def test_contain_not_string(test_trie):
-    """Test that you can't pass anything but a string in there."""
-    with pytest.raises(TypeError):
-        test_trie.contains(345)
-
-
-def test_contain_empty_string(test_trie):
-    """Test it won't accept empty string."""
-    with pytest.raises(ValueError):
-        test_trie.contains('')
-
-
 def test_remove_not_string(test_trie):
     """Test that you can't pass anything but a string in there."""
     with pytest.raises(TypeError):
@@ -177,12 +168,6 @@ def test_autocomplete_not_string(test_trie):
     """Test that you can't pass anything but a string in there."""
     with pytest.raises(TypeError):
         next(test_trie.autocomplete(True))
-
-
-def test_autocomplete_empty_string(test_trie):
-    """Test it won't accept empty string."""
-    with pytest.raises(ValueError):
-        next(test_trie.autocomplete(''))
 
 
 def test_autocomplete_checks_contains_word(test_trie):

@@ -1,7 +1,7 @@
-"""Implementation of a trie in Python."""
+"""Implement a trie in Python."""
 
 
-class Trie:
+class Trie(object):
     """Define a trie and its methods."""
 
     def __init__(self):
@@ -9,10 +9,12 @@ class Trie:
         self._base = {}
         self._size = 0
 
-    def insert(self, word: str) -> None:
+    def insert(self, word):
         """Insert an input string into the trie."""
         if not isinstance(word, str):
             raise TypeError('Insert takes in one param which must be a string')
+        if not word or word == '':
+            raise ValueError('Please enter a string')
 
         curr = self._base
         for idx, char in enumerate(word):
@@ -29,7 +31,7 @@ class Trie:
                 curr[char] = {}
                 curr = curr[char]
 
-    def contains(self, word: str) -> bool:
+    def contains(self, word):
         """Check to see if a given word is contained in the trie."""
         if not isinstance(word, str):
             raise TypeError('Contains takes in one param which must be a string')
@@ -50,10 +52,12 @@ class Trie:
         """Return the total number of words in the trie."""
         return self._size
 
-    def remove(self, word: str) -> None:
+    def remove(self, word):
         """Remove the specified word from the trie."""
         if not isinstance(word, str):
             raise TypeError('Remove takes in one param which must be a string')
+        if not word or word == '':
+            raise ValueError('Please enter a string')
 
         if not self.contains(word):
             raise ValueError('String not in trie')
@@ -75,7 +79,7 @@ class Trie:
                 else:
                     curr = curr[char]
 
-    def traversal(self, start: str, last: str=None) -> None:
+    def traversal(self, start, last=None):
         """Perform a DFT of the trie from a specified start."""
         if not isinstance(start, str):
             raise TypeError('Traversal takes in one param which must be a string')
@@ -103,11 +107,12 @@ class Trie:
                     for each_char in self.traversal(start, last[char]):
                         yield each_char
 
-    def autocomplete(self, start: str, last: str=None) -> str:
+    def autocomplete(self, start, last=None):
         """Autocomplete a string with all possible words."""
         if not isinstance(start, str):
             raise TypeError('Traversal takes in one param which must be a string')
-
+        if not start or start == '':
+            raise ValueError('Please enter a string')
         words = []
         if not last:
             curr = self._base
@@ -131,5 +136,4 @@ class Trie:
                 if not char == '$':
                     next = start + char
                     words.extend(self.autocomplete(next, last[char]))
-
         return words
