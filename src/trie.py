@@ -36,7 +36,7 @@ class Trie:
             raise TypeError('word argument must be str')
 
         curr = self._base
-        for idx, char in enumerate(word + '$'):
+        for char in word + '$':
             try:
                 curr = curr[char]
             except KeyError:
