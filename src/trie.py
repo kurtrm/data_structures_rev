@@ -15,12 +15,13 @@ class Trie:
             raise TypeError('Insert takes in one param which must be a string')
 
         curr = self._base
+        last_letter = len(word) - 1
         for idx, char in enumerate(word):
-            if idx == (len(word) - 1) and char not in curr:
+            if idx == last_letter and char not in curr:
                 curr[char] = {}
                 curr[char]['$'] = {}
                 self._size += 1
-            elif idx == (len(word) - 1) and char in curr and '$' not in curr[char]:
+            elif idx == last_letter and char in curr and '$' not in curr[char]:
                 curr[char]['$'] = {}
                 self._size += 1
             elif char in curr:
@@ -32,19 +33,16 @@ class Trie:
     def contains(self, word: str) -> bool:
         """Check to see if a given word is contained in the trie."""
         if not isinstance(word, str):
-            raise TypeError('Contains takes in one param which must be a string')
-        if not word or word == '':
-            raise ValueError('Please enter a string')
+            raise TypeError('word argument must be str')
 
         curr = self._base
-        for idx, char in enumerate(word):
-            if idx == (len(word) - 1) and char in curr and '$' in curr[char]:
-                return True
-            elif char in curr:
+        for idx, char in enumerate(word + '$'):
+            try:
                 curr = curr[char]
-            else:
+            except KeyError:
                 return False
-        return False
+        else:
+            return True
 
     def size(self):
         """Return the total number of words in the trie."""
