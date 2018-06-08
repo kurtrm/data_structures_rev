@@ -53,8 +53,6 @@ class Trie:
         if not isinstance(word, str):
             raise TypeError('Remove takes in one param which must be a string')
 
-        if not self.contains(word):
-            raise ValueError('String not in trie')
         else:
             curr = self._base
             last_word = curr
