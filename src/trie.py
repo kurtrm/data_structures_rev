@@ -53,23 +53,22 @@ class Trie:
         if not isinstance(word, str):
             raise TypeError('Remove takes in one param which must be a string')
 
-        else:
-            curr = self._base
-            last_word = curr
-            next_letter = word[0]
-            for idx, char in enumerate(word):
-                if '$' in curr[char] and not idx == (len(word) - 1):
-                    last_word = curr[char]
-                    next_letter = word[idx + 1]
-                    curr = curr[char]
-                elif idx == (len(word) - 1):
-                    if len(curr[char]) > 1:
-                        del curr[char]['$']
-                    else:
-                        del last_word[next_letter]
-                        break
+        curr = self._base
+        last_word = curr
+        next_letter = word[0]
+        for idx, char in enumerate(word):
+            if '$' in curr[char] and not idx == (len(word) - 1):
+                last_word = curr[char]
+                next_letter = word[idx + 1]
+                curr = curr[char]
+            elif idx == (len(word) - 1):
+                if len(curr[char]) > 1:
+                    del curr[char]['$']
                 else:
-                    curr = curr[char]
+                    del last_word[next_letter]
+                    break
+            else:
+                curr = curr[char]
 
     def traversal(self, start: str, last: str=None) -> None:
         """Perform a DFT of the trie from a specified start."""
