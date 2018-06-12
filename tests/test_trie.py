@@ -50,6 +50,15 @@ def test_size(test_trie):
     assert test_trie.size == 3
 
 
+def test_insert_duplicates(test_trie):
+    """Test size doesn't increment with duplicates."""
+    test_trie.insert('test')
+    test_trie.insert('tests')
+    test_trie.insert('art')
+    test_trie.insert('art')
+    assert test_trie.size == 3
+
+
 def test_remove_method_long(test_trie):
     """Test the remove on a long string."""
     test_trie.insert('test')
