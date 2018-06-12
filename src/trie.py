@@ -53,20 +53,20 @@ class Trie:
         if not isinstance(word, str):
             raise TypeError('Parameter must be of type str')
 
-        curr = self._base
-        last_word = curr
-        for idx, char in enumerate(word, start=1):
-            if '$' in curr[char] and not idx == len(word):
-                last_word = curr[char]
+        current = self._base
+        # last_word = current
+        for idx, letter in enumerate(word, start=1):
+            if '$' in current[letter] and not idx == len(word):
+                last_word = current[letter]
                 next_letter = word[idx]
-                curr = curr[char]
+                current = current[letter]
             elif idx == len(word):
-                if len(curr[char]) > 1:
-                    del curr[char]['$']
+                if len(current[letter]) > 1:
+                    del current[letter]['$']
                 else:
                     del last_word[next_letter]
             else:
-                curr = curr[char]
+                current = current[letter]
 
     def traversal(self, start: str, last: str=None) -> None:
         """Perform a DFT of the trie from a specified start."""
