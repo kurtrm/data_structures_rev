@@ -17,18 +17,17 @@ class Trie:
         curr = self._base
         last_letter = len(word)
         for idx, char in enumerate(word, start=1):
-            if idx == last_letter and char not in curr:
-                curr[char] = {}
-                curr[char]['$'] = {}
-                self._size += 1
-            elif idx == last_letter and char in curr and '$' not in curr[char]:
-                curr[char]['$'] = {}
-                self._size += 1
-            elif char in curr:
+            try:
                 curr = curr[char]
-            else:
+                if idx == last_letter:
+                    curr['$'] = {}
+            except KeyError:
                 curr[char] = {}
-                curr = curr[char]
+                if idx == last_letter:
+                    curr[char]['$'] = {}
+                else:
+                    curr = curr[char]
+        self._size += 1
 
     def contains(self, word: str) -> bool:
         """Check to see if a given word is contained in the trie."""
