@@ -15,8 +15,8 @@ class Trie:
             raise TypeError('Insert takes in one param which must be a string')
 
         curr = self._base
-        last_letter = len(word) - 1
-        for idx, char in enumerate(word):
+        last_letter = len(word)
+        for idx, char in enumerate(word, start=1):
             if idx == last_letter and char not in curr:
                 curr[char] = {}
                 curr[char]['$'] = {}
