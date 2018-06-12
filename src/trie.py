@@ -48,10 +48,30 @@ class Trie:
         """Return the total number of words in the trie."""
         return self._size
 
-    def remove(self, word: str) -> None:
+    def remove(self, word: str, dicty: dict=None) -> None:
         """Remove the specified word from the trie."""
         if not isinstance(word, str):
-            raise TypeError('Remove takes in one param which must be a string')
+            raise TypeError('Parameter must be of type str')
+
+        last_marker = None
+        for idx, _ in enumerate(word, 1):
+            if word[:idx] in self and idx != len(word):
+                last_marker = idx
+
+        retrieved_dict = self._base
+        for letter in word[:idx]:
+            retrieved_dict = retrieved_dict[letter]
+
+        if len(retrieved_dict) > 1:
+            del retrieved_dict['$']
+        else:
+            del retrieved_dict
+
+
+        curr = self._base if dicty is None else dicty
+        for i, (key, value) in enumerate(curr.items()):
+
+
 
         curr = self._base
         last_word = curr
