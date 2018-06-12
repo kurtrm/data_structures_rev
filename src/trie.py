@@ -15,18 +15,18 @@ class Trie:
             raise TypeError('Insert takes in one param which must be a string')
 
         if word not in self:
-            curr = self._base
-            for idx, char in enumerate(word, start=1):
+            current = self._base
+            for idx, character in enumerate(word, start=1):
                 try:
-                    curr = curr[char]
+                    current = current[character]
                     if idx == len(word):
-                        curr['$'] = {}
+                        current['$'] = {}
                 except KeyError:
-                    curr[char] = {}
+                    current[character] = {}
                     if idx == len(word):
-                        curr[char]['$'] = {}
+                        current[character]['$'] = {}
                     else:
-                        curr = curr[char]
+                        current = current[character]
             self._size += 1
 
     def contains(self, word: str) -> bool:
@@ -34,10 +34,10 @@ class Trie:
         if not isinstance(word, str):
             raise TypeError('word argument must be str')
 
-        curr = self._base
-        for char in word + '$':
+        current = self._base
+        for character in word + '$':
             try:
-                curr = curr[char]
+                current = current[character]
             except KeyError:
                 return False
         else:
