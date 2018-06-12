@@ -47,7 +47,7 @@ def test_size(test_trie):
     test_trie.insert('test')
     test_trie.insert('tests')
     test_trie.insert('art')
-    assert test_trie.size() == 3
+    assert test_trie.size == 3
 
 
 def test_remove_method_long(test_trie):
@@ -87,7 +87,7 @@ def test_remove_only_word(test_trie):
     test_trie.insert('alphabet')
     test_trie.remove('alphabet')
     assert not test_trie.contains('alphabet')
-    assert test_trie.size() == 0
+    assert test_trie.size == 0
 
 
 def test_remove_method_short(test_trie):

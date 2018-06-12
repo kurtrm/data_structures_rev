@@ -44,6 +44,7 @@ class Trie:
         else:
             return True
 
+    @property
     def size(self):
         """Return the total number of words in the trie."""
         return self._size
@@ -57,7 +58,7 @@ class Trie:
         last_word = self._base
         next_letter = word[0]
         for idx, letter in enumerate(word, start=1):
-            if '$' in current[letter] and not idx == len(word):
+            if '$' in current[letter] and idx != len(word):
                 last_word = current[letter]
                 next_letter = word[idx]
                 current = current[letter]
