@@ -71,6 +71,17 @@ def test_remove_edge_case(test_trie):
     assert test_trie.contains('ants')
 
 
+def test_remove_other_edge_case(test_trie):
+    """Test where the first letter is a word by itself."""
+    test_trie.insert('a')
+    test_trie.insert('art')
+    test_trie.insert('ants')
+    test_trie.remove('art')
+    assert not test_trie.contains('art')
+    assert test_trie.contains('a')
+    assert test_trie.contains('ants')
+
+
 def test_remove_method_short(test_trie):
     """Test the remove on a short string."""
     test_trie.insert('test')
