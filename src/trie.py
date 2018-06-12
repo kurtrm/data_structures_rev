@@ -14,20 +14,20 @@ class Trie:
         if not isinstance(word, str):
             raise TypeError('Insert takes in one param which must be a string')
 
-        curr = self._base
-        last_letter = len(word)
-        for idx, char in enumerate(word, start=1):
-            try:
-                curr = curr[char]
-                if idx == last_letter:
-                    curr['$'] = {}
-            except KeyError:
-                curr[char] = {}
-                if idx == last_letter:
-                    curr[char]['$'] = {}
-                else:
+        if word not in self:
+            curr = self._base
+            for idx, char in enumerate(word, start=1):
+                try:
                     curr = curr[char]
-        self._size += 1
+                    if idx == len(word):
+                        curr['$'] = {}
+                except KeyError:
+                    curr[char] = {}
+                    if idx == len(word):
+                        curr[char]['$'] = {}
+                    else:
+                        curr = curr[char]
+            self._size += 1
 
     def contains(self, word: str) -> bool:
         """Check to see if a given word is contained in the trie."""
