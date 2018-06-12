@@ -55,7 +55,7 @@ class Trie:
 
         curr = self._base
         last_word = curr
-        for idx, char in enumerate(word, 1):
+        for idx, char in enumerate(word, start=1):
             if '$' in curr[char] and not idx == len(word):
                 last_word = curr[char]
                 next_letter = word[idx]
