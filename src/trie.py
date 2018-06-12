@@ -53,40 +53,18 @@ class Trie:
         if not isinstance(word, str):
             raise TypeError('Parameter must be of type str')
 
-        last_marker = None
-        for idx, _ in enumerate(word, 1):
-            if word[:idx] in self and idx != len(word):
-                last_marker = idx
-
-        retrieved_dict = self._base
-        for letter in word[:idx]:
-            retrieved_dict = retrieved_dict[letter]
-
-        if len(retrieved_dict) > 1:
-            del retrieved_dict['$']
-        else:
-            del retrieved_dict
-
-
-        curr = self._base if dicty is None else dicty
-        for i, (key, value) in enumerate(curr.items()):
-
-
-
         curr = self._base
         last_word = curr
-        next_letter = word[0]
-        for idx, char in enumerate(word):
-            if '$' in curr[char] and not idx == (len(word) - 1):
+        for idx, char in enumerate(word, 1):
+            if '$' in curr[char] and not idx == len(word):
                 last_word = curr[char]
-                next_letter = word[idx + 1]
+                next_letter = word[idx]
                 curr = curr[char]
-            elif idx == (len(word) - 1):
+            elif idx == len(word):
                 if len(curr[char]) > 1:
                     del curr[char]['$']
                 else:
                     del last_word[next_letter]
-                    break
             else:
                 curr = curr[char]
 
