@@ -54,7 +54,8 @@ class Trie:
             raise TypeError('Parameter must be of type str')
 
         current = self._base
-        # last_word = current
+        last_word = self._base
+        next_letter = word[0]
         for idx, letter in enumerate(word, start=1):
             if '$' in current[letter] and not idx == len(word):
                 last_word = current[letter]
@@ -65,6 +66,7 @@ class Trie:
                     del current[letter]['$']
                 else:
                     del last_word[next_letter]
+                self._size -= 1
             else:
                 current = current[letter]
 
