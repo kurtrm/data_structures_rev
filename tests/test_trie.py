@@ -100,6 +100,19 @@ def test_remove_method_short(test_trie):
     assert not test_trie.contains('test')
 
 
+def test_remove_word_from_empty_trie(test_trie):
+    """Test that we can't remove a word from an empty trie."""
+    with pytest.raises(ValueError):
+        test_trie.remove('false')
+
+
+def test_remove_word_not_in_trie(test_trie):
+    """Test that we can't remove a word that's not in the trie."""
+    with pytest.raises(ValueError):
+        test_trie.insert('test')
+        test_trie.remove('tried')
+
+
 def test_contains_special_method(test_trie):
     """Test that the special method works correctly."""
     test_trie.insert('test')

@@ -53,6 +53,8 @@ class Trie:
         """Remove the specified word from the trie."""
         if not isinstance(word, str):
             raise TypeError('Parameter must be of type str')
+        if word not in self:
+            raise ValueError('Word not in trie')
 
         current = self._base
         last_word = self._base
