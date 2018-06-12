@@ -47,7 +47,16 @@ def test_size(test_trie):
     test_trie.insert('test')
     test_trie.insert('tests')
     test_trie.insert('art')
-    assert test_trie.size() == 3
+    assert test_trie.size == 3
+
+
+def test_insert_duplicates(test_trie):
+    """Test size doesn't increment with duplicates."""
+    test_trie.insert('test')
+    test_trie.insert('tests')
+    test_trie.insert('art')
+    test_trie.insert('art')
+    assert test_trie.size == 3
 
 
 def test_remove_method_long(test_trie):
@@ -60,6 +69,36 @@ def test_remove_method_long(test_trie):
     assert test_trie.contains('test')
 
 
+def test_remove_edge_case(test_trie):
+    """Test where the first letter is a word by itself."""
+    test_trie.insert('a')
+    test_trie.insert('art')
+    test_trie.insert('ants')
+    test_trie.remove('a')
+    assert not test_trie.contains('a')
+    assert test_trie.contains('art')
+    assert test_trie.contains('ants')
+
+
+def test_remove_other_edge_case(test_trie):
+    """Test where the first letter is a word by itself."""
+    test_trie.insert('a')
+    test_trie.insert('art')
+    test_trie.insert('ants')
+    test_trie.remove('art')
+    assert not test_trie.contains('art')
+    assert test_trie.contains('a')
+    assert test_trie.contains('ants')
+
+
+def test_remove_only_word(test_trie):
+    """Test where the first letter is a word by itself."""
+    test_trie.insert('alphabet')
+    test_trie.remove('alphabet')
+    assert not test_trie.contains('alphabet')
+    assert test_trie.size == 0
+
+
 def test_remove_method_short(test_trie):
     """Test the remove on a short string."""
     test_trie.insert('test')
@@ -68,6 +107,19 @@ def test_remove_method_short(test_trie):
     test_trie.remove('test')
     assert test_trie.contains('tests')
     assert not test_trie.contains('test')
+
+
+def test_remove_word_from_empty_trie(test_trie):
+    """Test that we can't remove a word from an empty trie."""
+    with pytest.raises(ValueError):
+        test_trie.remove('false')
+
+
+def test_remove_word_not_in_trie(test_trie):
+    """Test that we can't remove a word that's not in the trie."""
+    with pytest.raises(ValueError):
+        test_trie.insert('test')
+        test_trie.remove('tried')
 
 
 def test_contains_special_method(test_trie):

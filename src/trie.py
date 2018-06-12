@@ -14,36 +14,36 @@ class Trie:
         if not isinstance(word, str):
             raise TypeError('Insert takes in one param which must be a string')
 
-        curr = self._base
-        last_letter = len(word) - 1
-        for idx, char in enumerate(word):
-            if idx == last_letter and char not in curr:
-                curr[char] = {}
-                curr[char]['$'] = {}
-                self._size += 1
-            elif idx == last_letter and char in curr and '$' not in curr[char]:
-                curr[char]['$'] = {}
-                self._size += 1
-            elif char in curr:
-                curr = curr[char]
-            else:
-                curr[char] = {}
-                curr = curr[char]
+        if word not in self:
+            current = self._base
+            for idx, character in enumerate(word, start=1):
+                try:
+                    current = current[character]
+                    if idx == len(word):
+                        current['$'] = {}
+                except KeyError:
+                    current[character] = {}
+                    if idx == len(word):
+                        current[character]['$'] = {}
+                    else:
+                        current = current[character]
+            self._size += 1
 
     def contains(self, word: str) -> bool:
         """Check to see if a given word is contained in the trie."""
         if not isinstance(word, str):
             raise TypeError('word argument must be str')
 
-        curr = self._base
-        for char in word + '$':
+        current = self._base
+        for character in word + '$':
             try:
-                curr = curr[char]
+                current = current[character]
             except KeyError:
                 return False
         else:
             return True
 
+    @property
     def size(self):
         """Return the total number of words in the trie."""
         return self._size
@@ -51,24 +51,26 @@ class Trie:
     def remove(self, word: str) -> None:
         """Remove the specified word from the trie."""
         if not isinstance(word, str):
-            raise TypeError('Remove takes in one param which must be a string')
+            raise TypeError('Parameter must be of type str')
+        if word not in self:
+            raise ValueError('Word not in trie')
 
-        curr = self._base
-        last_word = curr
+        current = self._base
+        last_word = self._base
         next_letter = word[0]
-        for idx, char in enumerate(word):
-            if '$' in curr[char] and not idx == (len(word) - 1):
-                last_word = curr[char]
-                next_letter = word[idx + 1]
-                curr = curr[char]
-            elif idx == (len(word) - 1):
-                if len(curr[char]) > 1:
-                    del curr[char]['$']
+        for idx, letter in enumerate(word, start=1):
+            if '$' in current[letter] and idx != len(word):
+                last_word = current[letter]
+                next_letter = word[idx]
+                current = current[letter]
+            elif idx == len(word):
+                if len(current[letter]) > 1:
+                    del current[letter]['$']
                 else:
                     del last_word[next_letter]
-                    break
+                self._size -= 1
             else:
-                curr = curr[char]
+                current = current[letter]
 
     def traversal(self, start: str, last: str=None) -> None:
         """Perform a DFT of the trie from a specified start."""
