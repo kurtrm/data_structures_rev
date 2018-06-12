@@ -49,7 +49,7 @@ class Trie:
         """Return the total number of words in the trie."""
         return self._size
 
-    def remove(self, word: str, dicty: dict=None) -> None:
+    def remove(self, word: str) -> None:
         """Remove the specified word from the trie."""
         if not isinstance(word, str):
             raise TypeError('Parameter must be of type str')
