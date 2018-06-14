@@ -1,4 +1,5 @@
 """Binary Min Heap."""
+from numbers import Number
 from typing import Iterable, Union
 
 
@@ -29,7 +30,7 @@ class BinHeap:
 
     def push(self, val: Union[int, float]) -> None:
         """Push a value onto the heap."""
-        if not isinstance(val, (int, float)):
+        if not isinstance(val, Number):
             raise TypeError(
                 'Argument must be an integer or float')
         self._iterable.append(val)
