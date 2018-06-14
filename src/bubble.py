@@ -1,7 +1,8 @@
 """Implementation of Bubble sort in Python."""
+from collections.abc import Iterable
 
 
-def bubble_sort(lineup):
+def bubble_sort(lineup: 'Iterable') -> 'Iterable':
     """
     Sort the iterable using the Bubble sort method.
     params
@@ -17,8 +18,8 @@ def bubble_sort(lineup):
     sorted. This implementation performs a lookback rather than a lookahead,
     thus we evaluate idx for a truthy integer when starting each iteration.
     """
-    if not isinstance(lineup, (list, tuple, str)):
-        raise TypeError("Input must be either list, tuple, or str")
+    if not issubclass(type(lineup), Iterable):
+        raise TypeError("argument must be iterable")
 
     size = len(lineup)
     while size > 0:
