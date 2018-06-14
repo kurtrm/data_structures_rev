@@ -72,16 +72,16 @@ class Trie:
             else:
                 current = current[letter]
 
-    def traversal(self, start: str, last: str=None) -> None:
+    def traversal(self, start: str, end: str=None) -> None:
         """Perform a DFT of the trie from a specified start."""
         if not isinstance(start, str):
             raise TypeError('Traversal takes in one param which must be a string')
-        if not start or start == '':
+        if not start:
             raise ValueError('Please enter a string')
-        if not last:
+        if end is None:
             curr = self._base
-            for idx, char in enumerate(start):
-                if idx == (len(start) - 1) and char in curr:
+            for idx, char in enumerate(start, start=1):
+                if idx == len(start) and char in curr:
                     yield start
                     curr = curr[char]
                     for char in curr:
@@ -94,22 +94,22 @@ class Trie:
                 else:
                     raise ValueError('String not in trie')
         else:
-            for char in last:
+            for char in end:
                 if not char == '$':
                     yield char
-                    for each_char in self.traversal(start, last[char]):
+                    for each_char in self.traversal(start, end[char]):
                         yield each_char
 
-    def autocomplete(self, start: str, last: str=None) -> str:
+    def autocomplete(self, start: str, end: str=None) -> str:
         """Autocomplete a string with all possible words."""
         if not isinstance(start, str):
             raise TypeError('Traversal takes in one param which must be a string')
 
         words = []
-        if not last:
+        if not end:
             curr = self._base
-            for idx, char in enumerate(start):
-                if idx == (len(start) - 1) and char in curr:
+            for idx, char in enumerate(start, start=1):
+                if idx == len(start) and char in curr:
                     curr = curr[char]
                     for char in curr:
                         if char == '$':
@@ -122,12 +122,12 @@ class Trie:
                 else:
                     raise ValueError('String not in trie')
         else:
-            for char in last:
+            for char in end:
                 if char == '$':
                     words.append(start)
                 if not char == '$':
                     next_char = start + char
-                    words.extend(self.autocomplete(next_char, last[char]))
+                    words.extend(self.autocomplete(next_char, end[char]))
 
         return words
 
