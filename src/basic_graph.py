@@ -20,12 +20,9 @@ class Graph:
 
     def edges(self):
         """Return a list of edges in the graph."""
-        empty_list = []
         for key, value in self._graph.items():
-            if value != []:
                 for neighbor in value:
-                    empty_list.append((key, neighbor))
-        return empty_list
+                    yield (key, neighbor)
 
     def add_node(self, val):
         """Add a new node with value to the graph."""
