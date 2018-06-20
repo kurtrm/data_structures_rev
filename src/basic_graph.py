@@ -1,4 +1,4 @@
-"""Graph data structure."""
+"""Directional graph implementation."""
 
 
 class Graph:
@@ -16,7 +16,7 @@ class Graph:
         a graph could potentially be huge. Instead, a generator
         of self._graph keys is returned.
         """
-        return (key for key in self._graph)
+        yield from self._graph
 
     def edges(self):
         """Return a list of edges in the graph."""
