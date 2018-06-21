@@ -79,28 +79,22 @@ def test_graph_deletes_nodes(graph_with_edges):
         assert node in graph_with_edges.nodes()
 
 
-def test_graph_cant_delete_an_unpresent_node(graph_no_edges):
-    """Ensure we can't delete that doesn't exist."""
-    with pytest.raises(ValueError):
-        graph_no_edges.del_nodes(3.14)
-
-
 def test_graph_cant_delete_without_argument(graph_no_edges):
     """Ensure we can't delete without an argument."""
     with pytest.raises(TypeError):
-        graph_no_edges.del_nodes()
+        graph_no_edges.del_node()
 
 
 def test_del_some_edges(graph_with_edges):
     """Ensure we delete edges."""
-    graph_with_edges.del_edges('Grapefruit', 'Luftballons')
+    graph_with_edges.del_edge('Grapefruit', 'Luftballons')
     assert graph_with_edges._graph['Grapefruit'] == [82]
 
 
 def test_cant_delete_nonexistent_edge(graph_with_edges):
     """Ensure we can't delete a nonexistent edge."""
     with pytest.raises(ValueError):
-        graph_with_edges.del_edges('Grapefruit', 'Badgers')
+        graph_with_edges.del_edge('Grapefruit', 'Badgers')
 
 
 def test_nodes_exist(graph_no_edges):
