@@ -37,19 +37,19 @@ class Graph:
             self._graph[val1].add(val2)
         self._graph.setdefault(val2, set())
 
-    def del_nodes(self, val):
+    def del_node(self, val):
         """Delete the node containing val from list."""
         try:
             del self._graph[val]
         except KeyError:
             pass
 
-    def del_edges(self, val1, val2):
+    def del_edge(self, val1, val2):
         """Delete the edge connecting val1 and val2 from the graph."""
-        if val2 in self._graph[val1]:
-            self._graph[val1].remove(val2)
-        else:
-            raise ValueError("There are not edges to delete.")
+        try:
+            self._graph[val1].discard(val2)
+        except KeyError:
+            raise ValueError(f"Node '{val1}' not in graph.")
 
     def has_node(self, val):
         """True is node containing val is in graph, false otherwise."""
@@ -57,18 +57,14 @@ class Graph:
 
     def neighbors(self, val):
         """Return the list of all nodes connected to the node containing val by edges."""
-        if val not in self._graph:
-            raise ValueError('That value is not in the graph.')
-        return self._graph[val]
+        try:
+            return self._graph[val]
+        except KeyError:
+            raise ValueError(f"Node '{val}' not in graph.")
 
     def adjacent(self, val1, val2):
         """Return true is val1 and val2 connected, false otherwise."""
-        if val1 not in self._graph or val2 not in self._graph:
-            raise ValueError("The values are not in the graph.")
-        return val2 in self._graph[val1]
-
-
-
-
-
-
+        try:
+            return val2 in self._graph[val1]
+        except KeyError:
+            raise ValueError(f"Node '{val1}' not in graph.")
