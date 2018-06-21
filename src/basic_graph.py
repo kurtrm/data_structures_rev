@@ -19,16 +19,14 @@ class Graph:
         yield from self._graph
 
     def edges(self):
-        """Return a list of edges in the graph."""
+        """Return a generator of edges in the graph."""
         for key, value in self._graph.items():
-                for neighbor in value:
-                    yield (key, neighbor)
+            for neighbor in value:
+                yield key, neighbor
 
     def add_node(self, val):
         """Add a new node with value to the graph."""
-        if val in self._graph.keys():
-            raise ValueError("This value is already in your graph.")
-        self._graph[val] = set()
+        self._graph.setdefault(val, set())
 
     def add_edge(self, val1, val2):
         """Add a new edge to the graph."""
