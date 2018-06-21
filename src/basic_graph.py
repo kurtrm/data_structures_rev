@@ -39,12 +39,10 @@ class Graph:
 
     def del_nodes(self, val):
         """Delete the node containing val from list."""
-        if val not in self._graph.keys():
-            raise ValueError("There is no value to delete.")
-        for node in self._graph.values():
-            if val in node:
-                node.remove(val)
-        del self._graph[val]
+        try:
+            del self._graph[val]
+        except KeyError:
+            pass
 
     def del_edges(self, val1, val2):
         """Delete the edge connecting val1 and val2 from the graph."""
