@@ -1,12 +1,12 @@
 """Test our graph implementation."""
 import pytest
-from basic_graph import Graph
+from src.basic_graph import Graph
 
 
 @pytest.fixture
 def new_graph():
     """Graph for testing."""
-    from basic_graph import Graph
+    from src.basic_graph import Graph
     empty_graph = Graph()
     return empty_graph
 
@@ -14,7 +14,7 @@ def new_graph():
 @pytest.fixture
 def graph_no_edges():
     """Test graph with nodes only."""
-    from basic_graph import Graph
+    from src.basic_graph import Graph
     example_graph = Graph()
     example_graph.add_node('Grapefruit')
     example_graph.add_node(82)
@@ -26,7 +26,7 @@ def graph_no_edges():
 @pytest.fixture
 def graph_with_edges():
     """Test graph with nodes only."""
-    from basic_graph import Graph
+    from src.basic_graph import Graph
     example_graph = Graph()
     example_graph.add_node('Grapefruit')
     example_graph.add_node(82)
@@ -50,16 +50,22 @@ def test_graph_adds_and_lists_nodes(graph_no_edges):
         assert node in graph_no_edges.nodes()
 
 
-def test_contains(graph_no_edges):
+def test_contains_true(graph_no_edges):
     """Ensure we can use the 'in' operator."""
-    node_list = ['Grapefruit', 82, 99, 'Luftballons', 3]
+    node_list = ['Grapefruit', 82, 99, 'Luftballons']
     assert all(node in graph_no_edges for node in node_list)
+
+
+def tes_contains_false(graph_no_edges):
+    """Ensure we can use the 'in' operator if false."""
+    node_list = ['Grape', 'Air', 45]
+    assert all(node not in graph_no_edges for node in node_list)
 
 
 def test_graph_adds_nodes_and_edges(graph_no_edges):
     """Ensure we add edges to the nodes."""
     graph_no_edges.add_edge('Louisiana Crawfish', 'WA Invasive Species')
-    assert graph_no_edges.edges() == [(
+    assert list(graph_no_edges.edges()) == [(
         'Louisiana Crawfish', 'WA Invasive Species')]
 
 
@@ -73,7 +79,7 @@ def test_graph_lists_adds_and_lists_edges(graph_no_edges):
 
 def test_graph_deletes_nodes(graph_with_edges):
     """Ensure we can delete a node."""
-    graph_with_edges.del_nodes('Grapefruit')
+    graph_with_edges.del_node('Grapefruit')
     listy = [82, 99, 'Luftballons']
     for node in listy:
         assert node in graph_with_edges.nodes()
@@ -88,13 +94,13 @@ def test_graph_cant_delete_without_argument(graph_no_edges):
 def test_del_some_edges(graph_with_edges):
     """Ensure we delete edges."""
     graph_with_edges.del_edge('Grapefruit', 'Luftballons')
-    assert graph_with_edges._graph['Grapefruit'] == [82]
+    assert graph_with_edges._graph['Grapefruit'] == {82}
 
 
-def test_cant_delete_nonexistent_edge(graph_with_edges):
+def test_cant_delete_edge_with_nonexistent_node(graph_with_edges):
     """Ensure we can't delete a nonexistent edge."""
     with pytest.raises(ValueError):
-        graph_with_edges.del_edge('Grapefruit', 'Badgers')
+        graph_with_edges.del_edge('Grape', 'Badgers')
 
 
 def test_nodes_exist(graph_no_edges):
@@ -113,12 +119,12 @@ def test_false_if_no_node(graph_no_edges):
 def test_node_neighbors(graph_no_edges):
     """Ensure we get the right neighbors for a node."""
     graph_no_edges.add_edge('Grapefruit', 82)
-    assert graph_no_edges.neighbors('Grapefruit') == [82]
+    assert graph_no_edges.neighbors('Grapefruit') == {82}
 
 
 def test_node_without_neighbors(graph_no_edges):
     """Ensure we get None back for neighbors."""
-    assert graph_no_edges.neighbors(99) == []
+    assert graph_no_edges.neighbors(99) == set()
 
 
 def test_node_error_if_nonpresent(graph_no_edges):
