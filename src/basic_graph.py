@@ -28,20 +28,16 @@ class Graph:
         """Add a new node with value to the graph."""
         if val in self._graph.keys():
             raise ValueError("This value is already in your graph.")
-        self._graph[val] = []
+        self._graph[val] = set()
 
     def add_edge(self, val1, val2):
         """Add a new edge to the graph."""
-        if self._graph.get(val1) is not None and val2 in self._graph.get(val1):
-            raise ValueError('This edge already exists.')
-        if val1 not in self._graph and val2 not in self._graph:
-            self._graph[val1] = []
-            self._graph[val2] = []
-        elif val1 not in self._graph:
-            self._graph[val1] = []
-        elif val2 not in self._graph:
-            self._graph[val2] = []
-        self._graph[val1].append(val2)
+        try:
+            self._graph[val1].add(val2)
+        except KeyError:
+            self._graph[val1] = set()
+            self._graph[val1].add(val2)
+        self._graph.setdefault(val2, set())
 
     def del_nodes(self, val):
         """Delete the node containing val from list."""
