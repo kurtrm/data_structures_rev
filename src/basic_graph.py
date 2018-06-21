@@ -68,3 +68,9 @@ class Graph:
             return val2 in self._graph[val1]
         except KeyError:
             raise ValueError(f"Node '{val1}' not in graph.")
+
+    def __contains__(self, node):
+        """Allow the use of the 'in' operator for membership."""
+        return node in self._graph
+
+    
