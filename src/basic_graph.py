@@ -72,5 +72,3 @@ class Graph:
     def __contains__(self, node):
         """Allow the use of the 'in' operator for membership."""
         return node in self._graph
-
-    

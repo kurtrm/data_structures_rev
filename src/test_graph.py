@@ -1,12 +1,12 @@
 """Test our graph implementation."""
 import pytest
-from graph_1 import Graph
+from basic_graph import Graph
 
 
 @pytest.fixture
 def new_graph():
     """Graph for testing."""
-    from graph_1 import Graph
+    from basic_graph import Graph
     empty_graph = Graph()
     return empty_graph
 
@@ -14,7 +14,7 @@ def new_graph():
 @pytest.fixture
 def graph_no_edges():
     """Test graph with nodes only."""
-    from graph_1 import Graph
+    from basic_graph import Graph
     example_graph = Graph()
     example_graph.add_node('Grapefruit')
     example_graph.add_node(82)
@@ -26,7 +26,7 @@ def graph_no_edges():
 @pytest.fixture
 def graph_with_edges():
     """Test graph with nodes only."""
-    from graph_1 import Graph
+    from basic_graph import Graph
     example_graph = Graph()
     example_graph.add_node('Grapefruit')
     example_graph.add_node(82)
@@ -36,13 +36,6 @@ def graph_with_edges():
     example_graph.add_edge('Grapefruit', 'Luftballons')
     example_graph.add_edge('Grapefruit', 82)
     return example_graph
-
-
-def test_graph_init_no_values_taken():
-    """Ensure we raise an error if we try to init with a value."""
-    from graph_1 import Graph
-    with pytest.raises(TypeError):
-        a_graph = Graph(2)
 
 
 def test_graph_init_success(new_graph):
@@ -57,10 +50,10 @@ def test_graph_adds_and_lists_nodes(graph_no_edges):
         assert node in graph_no_edges.nodes()
 
 
-def test_wont_add_edges_to_empty_graph(new_graph):
-    """Ensure we can't just add an edge without nodes."""
-    with pytest.raises(TypeError):
-        new_graph.add_edge()
+def test_contains(graph_no_edges):
+    """Ensure we can use the 'in' operator."""
+    node_list = ['Grapefruit', 82, 99, 'Luftballons', 3]
+    assert all(node in graph_no_edges for node in node_list)
 
 
 def test_graph_adds_nodes_and_edges(graph_no_edges):
