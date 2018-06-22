@@ -59,7 +59,7 @@ class LinkedList:
 
     def search(self, val, current_node=None):
         """Search the nodes for the value provided."""
-        if not current_node:
+        if current_node is None:
             current_node = self.head
 
         if val == current_node.data:
@@ -98,3 +98,10 @@ class LinkedList:
     def __str__(self):
         """Interact with built-in print function."""
         return self.display()
+
+    def __iter__(self):
+        """Permit iteration over the linked list."""
+        node = self.head
+        for _ in range(self._length):
+            yield node.data
+            node = node.next_node
