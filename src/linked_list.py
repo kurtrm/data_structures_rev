@@ -57,16 +57,14 @@ class LinkedList:
     #             return current_node.data
     #         current_node = current_node.next_node
 
-    def search(self, val, current_node=None):
-        """Search the nodes for the value provided."""
-        if current_node is None:
-            current_node = self.head
-
-        if val == current_node.data:
-            return current_node.data
-        elif current_node.next_node is None:
-            return
-        return self.search(val, current_node.next_node)
+    def search(self, val):
+        """
+        Alternate search method utilizing the iter special
+        method.
+        """
+        for node in self:
+            if node == val:
+                return node
 
     def remove(self, val):
         """Remove node from anywhere in the linked list with the val."""
