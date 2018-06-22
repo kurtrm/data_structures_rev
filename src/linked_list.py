@@ -85,15 +85,13 @@ class LinkedList:
 
     def display(self):
         """Present a visual representation of the linked list."""
-        node = self.head
-        display_str = ""
-        for _ in range(self._length):
-            if node.next_node is not None:
-                display_str += '{}, '.format(str(node.data))
+        display_str = ''
+        for i, node in enumerate(self, 1):
+            if i == len(self):
+                display_str += f'{node}'
             else:
-                display_str += '{}'.format(str(node.data))
-            node = node.next_node
-        return "({})".format(display_str)
+                display_str += f'{node}, '
+        return f'({display_str})'
 
     def __str__(self):
         """Interact with built-in print function."""
