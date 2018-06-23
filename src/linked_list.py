@@ -97,3 +97,7 @@ class LinkedList:
         for _ in range(self._length):
             yield node
             node = node.next_node
+
+    def __contains__(self, val):
+        """Permit the use of the 'in' operator."""
+        return bool(self.search(val))
