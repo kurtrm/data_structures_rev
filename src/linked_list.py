@@ -86,9 +86,9 @@ class LinkedList:
         display_str = ''
         for i, node in enumerate(self, 1):
             if i == len(self):
-                display_str += f'{node}'
+                display_str += f'{node.data}'
             else:
-                display_str += f'{node}, '
+                display_str += f'{node.data}, '
         return f'({display_str})'
 
     def __str__(self):
@@ -99,5 +99,5 @@ class LinkedList:
         """Permit iteration over the linked list."""
         node = self.head
         for _ in range(self._length):
-            yield node.data
+            yield node
             node = node.next_node
