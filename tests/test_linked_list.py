@@ -162,3 +162,19 @@ def test_linked_list_str():
     from src.linked_list import LinkedList
     new_list = LinkedList([1, 2, 3, 4, None, True, 'stringy'])
     assert new_list.display() == str(new_list)
+
+
+def test_contains_positives():
+    """Ensure in operator works."""
+    from src.linked_list import LinkedList
+    vals = [2, None, 'stringy']
+    new_list = LinkedList([1, 2, 3, 4, None, True, 'stringy'])
+    assert all(val in new_list for val in vals)
+
+
+def test_contains_negatives():
+    """Ensure in operator works."""
+    from src.linked_list import LinkedList
+    vals = [10, False, 'stringies']
+    new_list = LinkedList([1, 2, 3, 4, None, True, 'stringy'])
+    assert all(val not in new_list for val in vals)
