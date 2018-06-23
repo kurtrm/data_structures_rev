@@ -55,16 +55,22 @@ class LinkedList:
         method.
         """
         for node in self:
-            if node == val:
+            if node.data == val:
                 return node
 
     def remove(self, val):
         """Remove node from anywhere in the linked list with the val."""
         if self.head.data != val:
+            prev_node = self.head
             for node in self:
                 if node.data == val:
-                    node.next_node = node.next_node.next_node
+                    try:
+                        prev_node.next_node = node.next_node
+                    except AttributeError:
+                        prev_node.next_node = None
                     break
+                else:
+                    prev_node = node
             else:
                 raise ValueError('Value not found.')
         else:

@@ -116,7 +116,7 @@ def test_linked_list_remove_phase_two():
     new_list.remove(1)
     new_list.remove(4)
     assert (new_list.search(4),
-            new_list.search(3)) == (None, new_list.head.data)
+            new_list.search(3).data) == (None, new_list.head.data)
 
 
 def test_linked_list_remove_phase_three():
@@ -128,7 +128,7 @@ def test_linked_list_remove_phase_three():
     new_list.push(5)
     new_list.remove(3)
     assert (new_list.search(3),
-            new_list.search(5)) == (None, new_list.head.data)
+            new_list.search(5).data) == (None, new_list.head.data)
 
 
 def test_linked_list_remove_phase_three_len():
