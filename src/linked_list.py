@@ -49,14 +49,6 @@ class LinkedList:
         """Interact with built-in len() function."""
         return self.size()
 
-    # def search(self, val):
-    #     """Search the nodes for the value provided."""
-    #     current_node = self.head
-    #     while current_node is not None:
-    #         if current_node.data == val:
-    #             return current_node.data
-    #         current_node = current_node.next_node
-
     def search(self, val):
         """
         Alternate search method utilizing the iter special
@@ -69,12 +61,10 @@ class LinkedList:
     def remove(self, val):
         """Remove node from anywhere in the linked list with the val."""
         if self.head.data != val:
-            current_node = self.head
-            while current_node.next_node is not None:
-                if current_node.next_node.data == val:
-                    current_node.next_node = current_node.next_node.next_node
+            for node in self:
+                if node.data == val:
+                    node.next_node = node.next_node.next_node
                     break
-                current_node = current_node.next_node
             else:
                 raise ValueError('Value not found.')
         else:

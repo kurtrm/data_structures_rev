@@ -95,9 +95,9 @@ def test_linked_list_search(linked_list):
     obj_2 = 45
     obj_3 = ['stringy']
     linked_list = LinkedList([obj_1, obj_2, obj_3])
-    assert (linked_list.search(45),
-            linked_list.search(['stringy']),
-            linked_list.search(obj_1),
+    assert (linked_list.search(45).data,
+            linked_list.search(['stringy']).data,
+            linked_list.search(obj_1).data,
             linked_list.search(47)) == (obj_2, obj_3, 'apple', None)
 
 
