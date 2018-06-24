@@ -11,12 +11,13 @@ TODO: The head and tail are swapped...The tail's prev_node(prior_node)
 should be pointing into the dll, not out. Same with head regarding next
 node.
 """
+from typing import Any
 
 
 class Node:
     """Node class for use in double linked list."""
 
-    def __init__(self, data, next_node=None, prior_node=None):
+    def __init__(self, data: Any, next_node: 'Node'=None, prior_node: 'Node'=None) -> None:
         """Initialize a node when adding to the linked list."""
         self.data = data
         self.next_node = next_node
@@ -26,13 +27,13 @@ class Node:
 class DoubleLinkedList:
     """Double linked version of a list."""
 
-    def __init__(self):
+    def __init__(self) -> None:
         """Initialize an empty double linked list."""
         self._length = 0
         self.tail = None
         self.head = None
 
-    def push(self, val):
+    def push(self, val: Any) -> None:
         """Push a value to the head of the list."""
         if self.tail is None and self.head is None:
             self.tail = self.head = Node(val)
