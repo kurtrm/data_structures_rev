@@ -49,34 +49,28 @@ class LinkedList:
         """Interact with built-in len() function."""
         return self.size()
 
-    # def search(self, val):
-    #     """Search the nodes for the value provided."""
-    #     current_node = self.head
-    #     while current_node is not None:
-    #         if current_node.data == val:
-    #             return current_node.data
-    #         current_node = current_node.next_node
-
-    def search(self, val, current_node=None):
-        """Search the nodes for the value provided."""
-        if not current_node:
-            current_node = self.head
-
-        if val == current_node.data:
-            return current_node.data
-        elif current_node.next_node is None:
-            return
-        return self.search(val, current_node.next_node)
+    def search(self, val):
+        """
+        Alternate search method utilizing the iter special
+        method.
+        """
+        for node in self:
+            if node.data == val:
+                return node
 
     def remove(self, val):
         """Remove node from anywhere in the linked list with the val."""
         if self.head.data != val:
-            current_node = self.head
-            while current_node.next_node is not None:
-                if current_node.next_node.data == val:
-                    current_node.next_node = current_node.next_node.next_node
+            prev_node = self.head
+            for node in self:
+                if node.data == val:
+                    try:
+                        prev_node.next_node = node.next_node
+                    except AttributeError:
+                        prev_node.next_node = None
                     break
-                current_node = current_node.next_node
+                else:
+                    prev_node = node
             else:
                 raise ValueError('Value not found.')
         else:
@@ -85,16 +79,25 @@ class LinkedList:
 
     def display(self):
         """Present a visual representation of the linked list."""
-        node = self.head
-        display_str = ""
-        for _ in range(self._length):
-            if node.next_node is not None:
-                display_str += '{}, '.format(str(node.data))
+        display_str = ''
+        for i, node in enumerate(self, 1):
+            if i == len(self):
+                display_str += f'{node.data}'
             else:
-                display_str += '{}'.format(str(node.data))
-            node = node.next_node
-        return "({})".format(display_str)
+                display_str += f'{node.data}, '
+        return f'({display_str})'
 
     def __str__(self):
         """Interact with built-in print function."""
         return self.display()
+
+    def __iter__(self):
+        """Permit iteration over the linked list."""
+        node = self.head
+        for _ in range(self._length):
+            yield node
+            node = node.next_node
+
+    def __contains__(self, val):
+        """Permit the use of the 'in' operator."""
+        return bool(self.search(val))

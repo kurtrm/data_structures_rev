@@ -95,9 +95,9 @@ def test_linked_list_search(linked_list):
     obj_2 = 45
     obj_3 = ['stringy']
     linked_list = LinkedList([obj_1, obj_2, obj_3])
-    assert (linked_list.search(45),
-            linked_list.search(['stringy']),
-            linked_list.search(obj_1),
+    assert (linked_list.search(45).data,
+            linked_list.search(['stringy']).data,
+            linked_list.search(obj_1).data,
             linked_list.search(47)) == (obj_2, obj_3, 'apple', None)
 
 
@@ -116,7 +116,7 @@ def test_linked_list_remove_phase_two():
     new_list.remove(1)
     new_list.remove(4)
     assert (new_list.search(4),
-            new_list.search(3)) == (None, new_list.head.data)
+            new_list.search(3).data) == (None, new_list.head.data)
 
 
 def test_linked_list_remove_phase_three():
@@ -128,7 +128,7 @@ def test_linked_list_remove_phase_three():
     new_list.push(5)
     new_list.remove(3)
     assert (new_list.search(3),
-            new_list.search(5)) == (None, new_list.head.data)
+            new_list.search(5).data) == (None, new_list.head.data)
 
 
 def test_linked_list_remove_phase_three_len():
@@ -162,3 +162,19 @@ def test_linked_list_str():
     from src.linked_list import LinkedList
     new_list = LinkedList([1, 2, 3, 4, None, True, 'stringy'])
     assert new_list.display() == str(new_list)
+
+
+def test_contains_positives():
+    """Ensure in operator works."""
+    from src.linked_list import LinkedList
+    vals = [2, None, 'stringy']
+    new_list = LinkedList([1, 2, 3, 4, None, True, 'stringy'])
+    assert all(val in new_list for val in vals)
+
+
+def test_contains_negatives():
+    """Ensure in operator works."""
+    from src.linked_list import LinkedList
+    vals = [10, False, 'stringies']
+    new_list = LinkedList([1, 2, 3, 4, None, True, 'stringy'])
+    assert all(val not in new_list for val in vals)

@@ -55,8 +55,7 @@ class Trie:
         if word not in self:
             raise ValueError('Word not in trie')
 
-        current = self._base
-        last_word = self._base
+        current = last_word = self._base
         next_letter = word[0]
         for idx, letter in enumerate(word, start=1):
             if '$' in current[letter] and idx != len(word):
