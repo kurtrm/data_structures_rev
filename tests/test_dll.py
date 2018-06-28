@@ -229,6 +229,67 @@ def test_dll_shift(dll):
     with pytest.raises(IndexError):
         dll.shift()
 
-def test_snip(dll):
-    """Test the dry version of pop and shift."""
 
+def test_dll_search(dll):
+    """Test that we can search and receive a node."""
+    dll.push(1)
+    dll.push(2)
+    dll.append(3)
+    dll.push(4)
+    dll.push(5)
+    dll.push(6)
+    assert dll.search(4).data, dll.search('Megaman') == (4, None)
+
+
+def test_dll_iteration_empty(dll):
+    """Test that we don't get an error when iterating over empty dll."""
+    for node in dll:
+        assert node is None
+
+
+def test_getitem(dll):
+    """Test that we can use brackets to retrieve an item."""
+    dll.push(1)
+    dll.push(2)
+    dll.append(3)
+    dll.push(4)
+    dll.push(5)
+    dll.push(6)
+    assert dll[6] == dll.search(6)
+
+
+def test_reversed(dll):
+    """Test that we can iterate over the dll starting from tail."""
+    dll.push(1)
+    dll.push(2)
+    dll.append(3)
+    dll.push(4)
+    dll.push(5)
+    dll.push(6)
+    for node, val in zip(reversed(dll), [3, 1, 2, 4, 5, 6]):
+        assert node.data == val
+
+
+def test_contains(dll):
+    """Test that we can use the 'in' operator."""
+    dll.push(1)
+    dll.push(2)
+    dll.append(3)
+    dll.push(4)
+    dll.push(5)
+    dll.push(6)
+    assert all(num in dll for num in [1, 2, 3, 4, 5, 6])
+
+
+def test_not_contains(dll):
+    """
+    Test that we can use the 'in' operator without num
+    in dll.
+    """
+    dll.push(1)
+    dll.push(2)
+    dll.append(3)
+    dll.push(4)
+    dll.push(5)
+    dll.push(6)
+    assert all(num not in dll for num in ['a', 7, 13, 45, 1000])
