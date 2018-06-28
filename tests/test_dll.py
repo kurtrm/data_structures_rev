@@ -245,3 +245,28 @@ def test_dll_iteration_empty(dll):
     """Test that we don't get an error when iterating over empty dll."""
     for node in dll:
         assert node is None
+
+
+def test_getitem(dll):
+    """Test that we can use brackets to retrieve an item."""
+    dll.push(1)
+    dll.push(2)
+    dll.append(3)
+    dll.push(4)
+    dll.push(5)
+    dll.push(6)
+    assert dll[6] == dll.search(6)
+
+
+def test_reversed(dll):
+    """Test that we can iterate over the dll starting from tail."""
+    dll.push(1)
+    dll.push(2)
+    dll.append(3)
+    dll.push(4)
+    dll.push(5)
+    dll.push(6)
+    for node, val in zip(reversed(dll), [3, 1, 2, 4, 5, 6]):
+        assert node.data == val
+
+

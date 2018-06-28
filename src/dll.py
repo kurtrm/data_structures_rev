@@ -172,15 +172,17 @@ class DoubleLinkedList:
             yield node
             node = node.next_node
 
-    def __getitem__(self) -> 'Node':
+    def __getitem__(self, val) -> 'Node':
         """
         Implemented in order to use the __reversed__ special method.
         """
+        return self.search(val)
 
-    def __setitem__(self) -> 'Node':
+    def __setitem__(self, val, other) -> 'Node':
         """
         Implemented for safety.
         """
+        pass
 
     def __len__(self) -> int:
         """
@@ -192,3 +194,7 @@ class DoubleLinkedList:
         """
         Allow the doubly linked list to be iterated over in reverse.
         """
+        node = self.tail
+        for _ in range(self._length):
+            yield node
+            node = node.prior_node
