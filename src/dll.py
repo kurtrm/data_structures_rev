@@ -43,7 +43,7 @@ class DoubleLinkedList:
             self.head = new_node
         self._length += 1
 
-    def append(self, val) -> None:
+    def append(self, val: Any) -> None:
         """Append a val to the tail of a list."""
         if self.tail is None and self.head is None:
             self.tail = self.head = Node(val)
@@ -70,14 +70,14 @@ class DoubleLinkedList:
                 self.head.prior_node = new_node
                 self.head = new_node
             else:
-                raise ValueError("Side parameter accepts either 'end' or 'tail.'")
+                raise ValueError("Side parameter accepts either 'head' or 'tail.'")
             self._length += 1
 
     def pop(self) -> Any:
         """Pop pops from the head of the list."""
         if not self.head:
             raise IndexError(
-                'There\'s nothing to remove from the linked list.')
+                "Cannot pop from empty double linked list.")
         self._length -= 1
         if self.head == self.tail:
             last_pop = self.head
@@ -92,7 +92,7 @@ class DoubleLinkedList:
         """Remove the node from the tail of the list."""
         if not self.tail:
             raise IndexError(
-                'There\'s nothing to remove from the linked list.')
+                "Cannot pop from empty double linked list.")
         self._length -= 1
         if self.head == self.tail:
             last_pop = self.head
@@ -110,7 +110,7 @@ class DoubleLinkedList:
         """
         if not self.tail:
             raise IndexError(
-                'There\'s nothing to remove from the linked list.')
+                "Cannot pop from empty double linked list.")
         if self.head == self.tail and side in ['tail', 'head']:
             snipped = self.head
             self.tail = self.head = None
@@ -124,7 +124,7 @@ class DoubleLinkedList:
                 self.head = self.head.next_node
                 self.head.prior_node = None
             else:
-                raise ValueError("Side parameter accepts either 'end' or 'tail.'")
+                raise ValueError("Side parameter accepts either 'head' or 'tail.'")
         self._length -= 1
         return snipped.data
 
@@ -152,3 +152,35 @@ class DoubleLinkedList:
                     new_prior_node.next_node = new_next_node
                     self._length -= 1
                     break
+
+    def __contains__(self, val: Any) -> None:
+        """Allows the use of the 'in' operator."""
+
+    def search(self, val: Any, start: str='head') -> 'Node':
+        """
+        Search the doubly linked list for a value. start parameter denotes
+        on which end the search should start from.
+        """
+
+    def __iter__(self) -> 'Node':
+        """Allow iteration over the doubly linked list."""
+
+    def __getitem__(self) -> 'Node':
+        """
+        Implemented in order to use the __reversed__ special method.
+        """
+
+    def __setitem__(self) -> 'Node':
+        """
+        Implemented for safety.
+        """
+
+    def __len__(self) -> int:
+        """
+        Returns the size of the doubly linked list.
+        """
+
+    def __reversed__(self) -> 'Node':
+        """
+        Allow the doubly linked list to be iterated over in reverse.
+        """
