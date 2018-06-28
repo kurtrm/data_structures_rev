@@ -161,9 +161,16 @@ class DoubleLinkedList:
         Search the doubly linked list for a value. start parameter denotes
         on which end the search should start from.
         """
+        for node in self:
+            if node.data == val:
+                return node
 
     def __iter__(self) -> 'Node':
         """Allow iteration over the doubly linked list."""
+        node = self.head
+        for _ in range(self._length):
+            yield node
+            node = node.next_node
 
     def __getitem__(self) -> 'Node':
         """
@@ -179,6 +186,7 @@ class DoubleLinkedList:
         """
         Returns the size of the doubly linked list.
         """
+        return self._length
 
     def __reversed__(self) -> 'Node':
         """

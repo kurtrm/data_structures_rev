@@ -229,6 +229,19 @@ def test_dll_shift(dll):
     with pytest.raises(IndexError):
         dll.shift()
 
-def test_snip(dll):
-    """Test the dry version of pop and shift."""
 
+def test_dll_search(dll):
+    """Test that we can search and receive a node."""
+    dll.push(1)
+    dll.push(2)
+    dll.append(3)
+    dll.push(4)
+    dll.push(5)
+    dll.push(6)
+    assert dll.search(4).data, dll.search('Megaman') == (4, None)
+
+
+def test_dll_iteration_empty(dll):
+    """Test that we don't get an error when iterating over empty dll."""
+    for node in dll:
+        assert node is None
