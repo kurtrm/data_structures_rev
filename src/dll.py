@@ -155,6 +155,10 @@ class DoubleLinkedList:
 
     def __contains__(self, val: Any) -> None:
         """Allows the use of the 'in' operator."""
+        try:
+            return val == self.search(val).data
+        except AttributeError:
+            return False
 
     def search(self, val: Any, start: str='head') -> 'Node':
         """

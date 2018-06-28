@@ -270,3 +270,12 @@ def test_reversed(dll):
         assert node.data == val
 
 
+def test_contains(dll):
+    """Test that we can use the 'in' operator."""
+    dll.push(1)
+    dll.push(2)
+    dll.append(3)
+    dll.push(4)
+    dll.push(5)
+    dll.push(6)
+    assert all(num in dll for num in [1, 2, 3, 4, 5, 6])
