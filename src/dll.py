@@ -43,7 +43,7 @@ class DoubleLinkedList:
             self.head = new_node
         self._length += 1
 
-    def append(self, val):
+    def append(self, val) -> None:
         """Append a val to the tail of a list."""
         if self.tail is None and self.head is None:
             self.tail = self.head = Node(val)
@@ -53,7 +53,7 @@ class DoubleLinkedList:
             self.tail = new_node
         self._length += 1
 
-    def insert(self, side, val):
+    def insert(self, side: str, val: Any) -> None:
         """
         Append a val to either the head or the tail. Accepts
         'tail' or 'head' as arguments to the side parameter.
@@ -73,7 +73,7 @@ class DoubleLinkedList:
                 raise ValueError("Side parameter accepts either 'end' or 'tail.'")
             self._length += 1
 
-    def pop(self):
+    def pop(self) -> Any:
         """Pop pops from the head of the list."""
         if not self.head:
             raise IndexError(
@@ -88,7 +88,7 @@ class DoubleLinkedList:
         self.head.prior_node = None
         return popped.data
 
-    def shift(self):
+    def shift(self) -> Any:
         """Remove the node from the tail of the list."""
         if not self.tail:
             raise IndexError(
@@ -103,7 +103,7 @@ class DoubleLinkedList:
         self.tail.next_node = None
         return shifted.data
 
-    def snip(self, side):
+    def snip(self, side: str) -> None:
         """
         Remove and return either the head or the tail.
         Like insert, accepts 'tail' or 'head'.
@@ -128,13 +128,13 @@ class DoubleLinkedList:
         self._length -= 1
         return snipped.data
 
-    def size(self):
+    def size(self) -> int:
         """Return the length of the double linked list."""
         return self._length
 
 
 # TODO: Refactor this
-    def remove(self, val):
+    def remove(self, val: Any) -> None:
         """Remove a node with the value provided."""
         if self.head.data == val:
             self.pop()
