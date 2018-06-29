@@ -132,8 +132,6 @@ class DoubleLinkedList:
         """Return the length of the double linked list."""
         return self._length
 
-
-# TODO: Refactor this
     def remove(self, val: Any) -> None:
         """Remove a node with the value provided."""
         if self.head.data == val:
@@ -141,24 +139,14 @@ class DoubleLinkedList:
         elif self.tail.data == val:
             self.shift()
         else:
-            current_node = self.head
-            while current_node is not None:
-                if current_node.data != val:
-                    current_node = current_node.next_node
-                else:
-                    new_next_node = current_node.next_node
-                    new_prior_node = current_node.prior_node
+            for node in self:
+                if node.data == val:
+                    new_next_node = node.next_node
+                    new_prior_node = node.prior_node
                     new_next_node.prior_node = new_prior_node
                     new_prior_node.next_node = new_next_node
                     self._length -= 1
                     break
-
-    def __contains__(self, val: Any) -> None:
-        """Allows the use of the 'in' operator."""
-        try:
-            return val == self.search(val).data
-        except AttributeError:
-            return False
 
     def search(self, val: Any, start: str='head') -> 'Node':
         """
@@ -168,6 +156,13 @@ class DoubleLinkedList:
         for node in self:
             if node.data == val:
                 return node
+
+    def __contains__(self, val: Any) -> None:
+        """Allows the use of the 'in' operator."""
+        try:
+            return val == self.search(val).data
+        except AttributeError:
+            return False
 
     def __iter__(self) -> 'Node':
         """Allow iteration over the doubly linked list."""
