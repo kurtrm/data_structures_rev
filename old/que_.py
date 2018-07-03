@@ -26,3 +26,7 @@ class Queue(object):
     def size(self):
         """Length function for the queue."""
         return self._new_dll.size()
+
+    def __len__(self):
+        """Length."""
+        return self._new_dll.size()
