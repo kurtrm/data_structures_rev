@@ -12,15 +12,16 @@ def depth_first_traversal(graph: Graph, start: 'Node') -> list:
         raise TypeError('Must provide graph.')
     if not graph.has_node(start):
         raise KeyError('Node not in graph.')
-    peeped = set()
+    peeped = []
     stack = deque()
     stack.append(start)
     while len(stack) > 0:
         node = stack.pop()
-        peeped.add(node)
-        for neighbor in graph._graph[node]:
+        if node not in peeped:
+            peeped.append(node)
+        for neighbor in list(graph._graph[node])[::-1]:
             if neighbor not in peeped:
-                stack.push(neighbor)
+                stack.append(neighbor)
     return peeped
 
 
