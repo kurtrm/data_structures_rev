@@ -22,6 +22,7 @@ def depth_first_traversal(graph: Graph, start: 'Node') -> list:
         for neighbor in list(graph._graph[node])[::-1]:
             if neighbor not in peeped:
                 stack.append(neighbor)
+
     return peeped
 
 
@@ -41,6 +42,7 @@ def breadth_first_traversal(graph, start):
         for neighbor in graph._graph[node]:
             if neighbor not in peeped:
                 queue.enqueue(neighbor)
+
     return peeped
 
 
@@ -59,7 +61,6 @@ if __name__ == '__main__':
     new_graph.add_edge('C', 'B')
     new_graph.add_edge('F', 'A')
     new_graph.add_edge('C', 'F')
-
 
     print(new_graph._graph)
     print('depth_first_traversal():')
