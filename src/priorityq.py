@@ -1,10 +1,10 @@
 """Implement a priority queue using binary heap."""
 
 
-class PriorityQueue(object):
+class PriorityQueue:
     """Implement a priority queue."""
 
-    def __init__(self):
+    def __init__(self) -> None:
         """Initialize our priority queue."""
         self._heap = []
         self._length = 0
