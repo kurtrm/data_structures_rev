@@ -27,9 +27,9 @@ class PriorityQueue:
             current_node = heap_list.index(item)
             parent = (current_node - 1) // 2
             while current_node > 0:
-                parent_priority = list(heap_list[parent].values())[0]
-                current_node_priority = list(
-                    heap_list[current_node].values())[0]
+                parent_priority = heap_list[parent].value
+                parent_priority = heap_list[parent].value
+                current_node_priority = heap_list[current_node].value
                 if current_node_priority > 0:
                     if parent_priority is 0 or parent_priority > current_node_priority:
                         curr_val = heap_list[parent]
@@ -64,7 +64,7 @@ class PriorityQueue:
 
     def peek(self) -> List:
         """Return the highest priority item without removing from queue."""
-        return list(self._heap[0].keys())[0]
+        return self._heap[0].value
 
     def size(self) -> int:
         """Return the size of our priority queue."""
