@@ -27,9 +27,8 @@ class PriorityQueue:
             current_node = heap_list.index(item)
             parent = (current_node - 1) // 2
             while current_node > 0:
-                parent_priority = heap_list[parent].value
-                parent_priority = heap_list[parent].value
-                current_node_priority = heap_list[current_node].value
+                parent_priority = heap_list[parent].priority
+                current_node_priority = heap_list[current_node].priority
                 if current_node_priority > 0:
                     if parent_priority is 0 or parent_priority > current_node_priority:
                         curr_val = heap_list[parent]

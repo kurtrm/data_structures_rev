@@ -54,13 +54,13 @@ def test_priority_que_type_arguments_a(priority_queue):
 def test_priority_que_success(priority_queue):
     """Ensure it takes the correct arguments."""
     priority_queue.insert(15)
-    assert (priority_queue._heap[0].priority,
-            priority_queue._heap[0].value) == (15, 0)
+    assert (priority_queue._heap[0].value,
+            priority_queue._heap[0].priority) == (15, 0)
 
 
 def test_priority_que_success_multiple(priority_queue_full):
     """Ensure it takes the correct arguments."""
-    assert (priority_queue_full._heap[0].priority,
+    assert (priority_queue_full._heap[0].value,
             priority_queue_full._heap[-1].value) == (11, 3)
 
 
@@ -68,9 +68,9 @@ def test_priority_que_success_multiple_empty(priority_queue):
     """Ensure it takes the correct arguments."""
     priority_queue.insert(15)
     priority_queue.insert(13, 1)
-    assert (priority_queue._heap[0].priority,
-            priority_queue._heap[0].value,
-            priority_queue._heap[1].priority) == (13, 1, 15)
+    assert (priority_queue._heap[0].value,
+            priority_queue._heap[0].priority,
+            priority_queue._heap[1].value) == (13, 1, 15)
 
 
 def test_priority_que_success_min_no_priority(priority_queue):
@@ -78,7 +78,7 @@ def test_priority_que_success_min_no_priority(priority_queue):
     priority_queue.insert(10)
     priority_queue.insert(5)
     priority_queue.insert(100)
-    assert priority_queue._heap[0].priority == 10
+    assert priority_queue._heap[0].value == 10
 
 
 def test_priority_que_success_priority(priority_queue):
@@ -87,7 +87,7 @@ def test_priority_que_success_priority(priority_queue):
     priority_queue.insert(5)
     priority_queue.insert(100, 1)
     priority_queue.insert(10, 1)
-    assert priority_queue._heap[0].priority == 100
+    assert priority_queue._heap[0].value == 100
 
 
 def test_priority_que_success_priority_multiple(priority_queue):
@@ -97,7 +97,7 @@ def test_priority_que_success_priority_multiple(priority_queue):
     priority_queue.insert(100, 5)
     priority_queue.insert(10, 2)
     priority_queue.insert(50, 1)
-    assert priority_queue._heap[0].priority == 50
+    assert priority_queue._heap[0].value == 50
 
 
 def test_priority_que_pop(priority_queue_full):
@@ -112,7 +112,7 @@ def test_priority_que_pop_and_push(priority_queue_full):
     """Ensure successful interaction between pop and push."""
     priority_queue_full.pop()
     priority_queue_full.insert(11, 1)
-    assert priority_queue_full._heap[0].value == 1
+    assert priority_queue_full._heap[0].priority == 1
     priority_queue_full.pop()
     priority_queue_full.pop()
     priority_queue_full.insert(10, 1)
