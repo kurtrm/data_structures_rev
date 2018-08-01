@@ -1,68 +1,119 @@
-"""Implement a priority queue using binary heap."""
+"""
+The priority queue is going to look almost exactly like the binary heap.
+We can use the same logic, but we'll have to put each piece
+of data into a node object so it can have two attributes, data
+and priority. Priority will be set to zero by default, and the
+normal way of organizing the heap will prevail. In this case,
+it will not take an heap for initialization; it will be
+initialized as an empty priority queue.
+"""
+import pytest
 
 
-class PriorityQueue(object):
-    """Implement a priority queue."""
+@pytest.fixture
+def priority_queue():
+    """Priority queue for use in test."""
+    from priorityq import PriorityQueue
+    priority_queue = PriorityQueue()
+    return priority_queue
 
-    def __init__(self):
-        """Initialize our priority queue."""
-        self._heap = []
-        self._length = 0
 
-    def heapify(self, iterable):
-        """Function to heapify our dictionary in self._heap."""
-        heap_list = iterable
+@pytest.fixture
+def priority_queue_full():
+    """Priority queue for use in test."""
+    from priorityq import PriorityQueue
+    priority_queue = PriorityQueue()
+    priority_queue.insert(15, 5)
+    priority_queue.insert(12, 3)
+    priority_queue.insert(11, 1)
+    priority_queue.insert(6, 2)
+    priority_queue.insert(17)
+    priority_queue.insert(3)
+    return priority_queue
 
-        def bubble_up(parent, current_node):
-            """Helper function to reduce clutter."""
-            current_node = parent
-            parent = (current_node - 1) // 2
-            return (parent, current_node)
 
-        for item in heap_list[::-1]:
-            current_node = heap_list.index(item)
-            parent = (current_node - 1) // 2
-            while current_node > 0:
-                parent_priority = list(heap_list[parent].values())[0]
-                current_node_priority = list(
-                    heap_list[current_node].values())[0]
-                if current_node_priority > 0:
-                    if parent_priority is 0 or parent_priority > current_node_priority:
-                        curr_val = heap_list[parent]
-                        heap_list[parent] = heap_list[current_node]
-                        heap_list[current_node] = curr_val
-                        parent, current_node = bubble_up(parent, current_node)
-                    else:
-                        parent, current_node = bubble_up(parent, current_node)
-                else:
-                    parent, current_node = bubble_up(parent, current_node)
+def test_priority_que_init():
+    """Make sure they don't provide any arguments."""
+    from priorityq import PriorityQueue
+    with pytest.raises(TypeError):
+        new_pqueue = PriorityQueue(1)
 
-        return heap_list
 
-    def insert(self, value, priority=0):
-        """Insert a value into the priority queue with an optional priority."""
-        if not isinstance(priority, int):
-            raise TypeError("Must provide an integer for priority.")
-        if priority < 0:
-            raise ValueError(
-                "You may not use a negative priority."
-                "Priority must be 0 or greater.")
-        self._heap.append({value: priority})
-        if len(self._heap) > 1:
-            self._heap = self.heapify(self._heap)
-        self._length += 1
+def test_priority_que_type_arguments_negative(priority_queue):
+    """Make sure they cannot give priority <= 1."""
+    with pytest.raises(ValueError):
+        priority_queue.insert(3, -99)
 
-    def pop(self):
-        """Pop function for removing highest priority item from queue."""
-        pop_it = self._heap.pop(0)
-        self.heapify(self._heap)
-        self._length -= 1
-        return list(pop_it.keys())[0]
 
-    def peek(self):
-        """Return the highest priority item without removing from queue."""
-        return list(self._heap[0].keys())[0]
+def test_priority_que_type_arguments_a(priority_queue):
+    """Make sure they only give priority >= 1."""
+    with pytest.raises(TypeError):
+        priority_queue.insert(3, 'a')
 
-    def size(self):
-        """Return the size of our priority queue."""
-        return self._length
+
+def test_priority_que_success(priority_queue):
+    """Ensure it takes the correct arguments."""
+    priority_queue.insert(15)
+    assert (list(priority_queue._heap[0].keys())[0],
+            list(priority_queue._heap[0].values())[0]) == (15, 0)
+
+
+def test_priority_que_success_multiple(priority_queue_full):
+    """Ensure it takes the correct arguments."""
+    assert (list(priority_queue_full._heap[0].keys())[0],
+            list(priority_queue_full._heap[-1].keys())[0]) == (11, 3)
+
+
+def test_priority_que_success_multiple_empty(priority_queue):
+    """Ensure it takes the correct arguments."""
+    priority_queue.insert(15)
+    priority_queue.insert(13, 1)
+    assert (list(priority_queue._heap[0].keys())[0],
+            list(priority_queue._heap[0].values())[0],
+            list(priority_queue._heap[1].keys())[0]) == (13, 1, 15)
+
+
+def test_priority_que_success_min_no_priority(priority_queue):
+    """Ensure it orders by min if no priority provided."""
+    priority_queue.insert(10)
+    priority_queue.insert(5)
+    priority_queue.insert(100)
+    assert list(priority_queue._heap[0].keys())[0] == 10
+
+
+def test_priority_que_success_priority(priority_queue):
+    """Ensure it orders by precedence if same."""
+    priority_queue.insert(10)
+    priority_queue.insert(5)
+    priority_queue.insert(100, 1)
+    priority_queue.insert(10, 1)
+    assert list(priority_queue._heap[0].keys())[0] == 100
+
+
+def test_priority_que_success_priority_multiple(priority_queue):
+    """Ensure it orders by priority with different priorities."""
+    priority_queue.insert(20)
+    priority_queue.insert(5)
+    priority_queue.insert(100, 5)
+    priority_queue.insert(10, 2)
+    priority_queue.insert(50, 1)
+    assert list(priority_queue._heap[0].keys())[0] == 50
+
+
+def test_priority_que_pop(priority_queue_full):
+    """Ensure pop is working as expected."""
+    assert (priority_queue_full.pop(),
+            priority_queue_full.pop(),
+            priority_queue_full.pop(),
+            priority_queue_full.pop()) == (11, 6, 12, 15)
+
+
+def test_priority_que_pop_and_push(priority_queue_full):
+    """Ensure successful interaction between pop and push."""
+    priority_queue_full.pop()
+    priority_queue_full.insert(11, 1)
+    assert list(priority_queue_full._heap[0].values())[0] == 1
+    priority_queue_full.pop()
+    priority_queue_full.pop()
+    priority_queue_full.insert(10, 1)
+    assert priority_queue_full.peek() == 10
