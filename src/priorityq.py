@@ -14,7 +14,7 @@ class PriorityQueue:
         self._length = 0
 
     def heapify(self, iterable: List) -> List:
-        """Function to heapify our dictionary in self._heap."""
+        """Function to heapify our list of tuples in self._heap."""
         heap_list = list(iterable)
 
         def bubble_up(parent, current_node):
@@ -34,11 +34,7 @@ class PriorityQueue:
                         curr_val = heap_list[parent]
                         heap_list[parent] = heap_list[current_node]
                         heap_list[current_node] = curr_val
-                        parent, current_node = bubble_up(parent, current_node)
-                    else:
-                        parent, current_node = bubble_up(parent, current_node)
-                else:
-                    parent, current_node = bubble_up(parent, current_node)
+                parent, current_node = bubble_up(parent, current_node)
 
         return heap_list
 
