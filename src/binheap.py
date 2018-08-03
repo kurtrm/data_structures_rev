@@ -9,8 +9,10 @@ class BinHeap:
     def __init__(self, iterable: Union[None, Iterable]=None) -> None:
         """Initialize an empty min heap."""
         try:
+            self._iterable = []
             for num in iterable:
                 self.push(num)
+            # import pdb; pdb.set_trace()
         except TypeError:
             if iterable is None:
                 self._iterable = []
@@ -30,12 +32,19 @@ class BinHeap:
 
     #     return iterable
 
-    def heapify(self):
+    def heapify(self, index=None):
         """Function that will be used in init and other methods."""
         idx = len(self._iterable) - 1
-        parent = (idx - 1) // 2
-        while idx > 0 and self._iterable[idx] < self._iterable[parent]:
-            self._iterable[parent], self._iterable[idx] = self._iterable[idx], self._iterable[parent]
+        # if len(self._iterable) == 9:
+            # import pdb; pdb.set_trace()
+        # import pdb; pdb.set_trace()
+        if index:
+            parent = (index - 1) // 2
+        else:
+            parent = (idx - 1) // 2
+        while idx > 0:
+            if self._iterable[idx] > self._iterable[parent]:
+                self._iterable[parent], self._iterable[idx] = self._iterable[idx], self._iterable[parent]
             idx = parent
             parent = (idx - 1) // 2
 
@@ -48,8 +57,12 @@ class BinHeap:
 
     def pop(self) -> None:
         """Pop the min value from the heap, return it, and resort the heap."""
+        # self._iterable[-1], self._iterable[0] = self._iterable[0], self._iterable[-1]
+        # import pdb; pdb.set_trace()
+        # index = len(self._iterable)
         popped = self._iterable.pop(0)
-        self.heapify(self._iterable)
+        self.heapify()
+        # popped = self._iterable.pop()
 
         return popped
 
