@@ -12,28 +12,15 @@ class BinHeap:
             self._iterable = []
             for num in iterable:
                 self.push(num)
-            # import pdb; pdb.set_trace()
         except TypeError:
             if iterable is None:
                 self._iterable = []
             else:
                 raise ValueError('Argument must be an iterable')
 
-    # def heapify(self, iterable: list) -> list:
-    #     """Function that will be used in init and other methods."""
-    #     for item in reversed(iterable):
-    #         # import pdb; pdb.set_trace()
-    #         idx = iterable.index(item)
-    #         parent = (idx - 1) // 2
-    #         while idx > 0 and iterable[idx] < iterable[parent]:
-    #             iterable[parent], iterable[idx] = iterable[idx], iterable[parent]
-    #             idx = parent
-    #             parent = (idx - 1) // 2
-
-    #     return iterable
-
-    def sort_down(self, index):
+    def sort_down(self, index=0):
         """
+        Starting from the top position, sort down the items in the list to get the max at the top.
         """
         try:
             if index:
@@ -50,13 +37,10 @@ class BinHeap:
         except IndexError:
             pass
 
-    def heapify(self, index=None):
+    def heapify(self):
         """Function that will be used in init and other methods."""
         idx = len(self._iterable) - 1
-        if index:
-            parent = (index - 1) // 2
-        else:
-            parent = (idx - 1) // 2
+        parent = (idx - 1) // 2
         while idx > 0:
             if self._iterable[idx] < self._iterable[parent]:
                 self._iterable[parent], self._iterable[idx] = self._iterable[idx], self._iterable[parent]
@@ -72,9 +56,13 @@ class BinHeap:
 
     def pop(self) -> None:
         """Pop the min value from the heap, return it, and resort the heap."""
-        self._iterable[-1], self._iterable[0] = self._iterable[0], self._iterable[-1]
-        popped = self._iterable.pop()
-        self.sort_down(0)
+        try:
+            self._iterable[-1], self._iterable[0] = self._iterable[0], self._iterable[-1]
+            popped = self._iterable.pop()
+        except IndexError:
+            raise IndexError("pop from empty heap")
+
+        self.sort_down()
 
         return popped
 
