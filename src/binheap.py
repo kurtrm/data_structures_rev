@@ -40,11 +40,11 @@ class BinHeap:
                 left, right = (index * 2) + 1, (index * 2) + 2
             else:
                 left, right = 1, 2
-            if self._iterable[left] > self._iterable[right]:
+            if self._iterable[left] < self._iterable[right]:
                 idx, highest = left, self._iterable[left]
             else:
                 idx, highest = right, self._iterable[right]
-            if highest > self._iterable[index]:
+            if highest < self._iterable[index]:
                 self._iterable[idx], self._iterable[index] = self._iterable[index], self._iterable[idx]
             self.sort_down(idx)
         except IndexError:
@@ -58,7 +58,7 @@ class BinHeap:
         else:
             parent = (idx - 1) // 2
         while idx > 0:
-            if self._iterable[idx] > self._iterable[parent]:
+            if self._iterable[idx] < self._iterable[parent]:
                 self._iterable[parent], self._iterable[idx] = self._iterable[idx], self._iterable[parent]
             idx = parent
             parent = (idx - 1) // 2
