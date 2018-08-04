@@ -32,12 +32,27 @@ class BinHeap:
 
     #     return iterable
 
+    def sort_down(self, index):
+        """
+        """
+        try:
+            if index:
+                left, right = (index * 2) + 1, (index * 2) + 2
+            else:
+                left, right = 1, 2
+            if self._iterable[left] > self._iterable[right]:
+                idx, highest = left, self._iterable[left]
+            else:
+                idx, highest = right, self._iterable[right]
+            if highest > self._iterable[index]:
+                self._iterable[idx], self._iterable[index] = self._iterable[index], self._iterable[idx]
+            self.sort_down(idx)
+        except IndexError:
+            pass
+
     def heapify(self, index=None):
         """Function that will be used in init and other methods."""
         idx = len(self._iterable) - 1
-        # if len(self._iterable) == 9:
-            # import pdb; pdb.set_trace()
-        # import pdb; pdb.set_trace()
         if index:
             parent = (index - 1) // 2
         else:
@@ -57,12 +72,9 @@ class BinHeap:
 
     def pop(self) -> None:
         """Pop the min value from the heap, return it, and resort the heap."""
-        # self._iterable[-1], self._iterable[0] = self._iterable[0], self._iterable[-1]
-        # import pdb; pdb.set_trace()
-        # index = len(self._iterable)
-        popped = self._iterable.pop(0)
-        self.heapify()
-        # popped = self._iterable.pop()
+        self._iterable[-1], self._iterable[0] = self._iterable[0], self._iterable[-1]
+        popped = self._iterable.pop()
+        self.sort_down(0)
 
         return popped
 
