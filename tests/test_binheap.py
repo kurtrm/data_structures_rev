@@ -49,7 +49,7 @@ def test_heap_initialized_with_list(full_heap):
     """Test that there's stuff in there."""
     from src.binheap import BinHeap
     assert isinstance(full_heap, BinHeap)
-    assert full_heap._iterable == [0, 1, 4, 2, 5, 67, 32, 101, 94, 72]
+    assert full_heap._iterable == [0, 1, 2, 67, 5, 32, 4, 101, 94, 72]
 
 
 def test_heap_push_none(empty_heap):
