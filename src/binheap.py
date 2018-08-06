@@ -18,15 +18,12 @@ class BinHeap:
             else:
                 raise ValueError('Argument must be an iterable')
 
-    def _sort_down(self, index=0):
+    def _sort_down(self, index=0) -> None:
         """
         Starting from the top position, sort down the items in the list to get the max at the top.
         """
+        left, right = (index * 2) + 1, (index * 2) + 2
         try:
-            if index:
-                left, right = (index * 2) + 1, (index * 2) + 2
-            else:
-                left, right = 1, 2
             if self._iterable[left] < self._iterable[right]:
                 idx, highest = left, self._iterable[left]
             else:
@@ -37,7 +34,7 @@ class BinHeap:
         except IndexError:
             pass
 
-    def heapify(self):
+    def heapify(self) -> None:
         """Function that will be used in init and other methods."""
         idx = len(self._iterable) - 1
         parent = (idx - 1) // 2
