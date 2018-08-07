@@ -35,7 +35,7 @@ def priority_queue_full():
 def test_priority_que_init():
     """Make sure they don't provide any arguments."""
     from src.priorityq import PriorityQueue
-    with pytest.raises(TypeError):
+    with pytest.raises(ValueError):
         new_pqueue = PriorityQueue(1)
 
 
@@ -55,11 +55,12 @@ def test_priority_que_success(priority_queue):
     """Ensure it takes the correct arguments."""
     priority_queue.insert(15)
     assert (priority_queue._heap[0].value,
-            priority_queue._heap[0].priority) == (15, 0)
+            priority_queue._heap[0].priority) == (15, float('inf'))
 
 
 def test_priority_que_success_multiple(priority_queue_full):
     """Ensure it takes the correct arguments."""
+    # import pdb; pdb.set_trace()
     assert (priority_queue_full._heap[0].value,
             priority_queue_full._heap[-1].value) == (11, 3)
 
@@ -102,6 +103,7 @@ def test_priority_que_success_priority_multiple(priority_queue):
 
 def test_priority_que_pop(priority_queue_full):
     """Ensure pop is working as expected."""
+    # import pdb; pdb.set_trace()
     assert (priority_queue_full.pop(),
             priority_queue_full.pop(),
             priority_queue_full.pop(),

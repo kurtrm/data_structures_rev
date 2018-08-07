@@ -71,6 +71,7 @@ def test_empty_heap_pop(empty_heap):
 
 def test_successful_pop(full_heap):
     """Test that we get the smallest number when we pop."""
+    # import pdb; pdb.set_trace()
     assert full_heap.pop() == 0
     assert full_heap._iterable[0] == 1
     assert full_heap.pop() == 1
@@ -106,3 +107,22 @@ def test_big_random_heap(random_heap):
     for pop in random_heap._iterable:
         random_heap_min = min(random_heap._iterable)
         assert random_heap.pop() == random_heap_min
+
+
+def test_push_non_integer(random_heap):
+    """
+    Ensure we raise an error when pushing a non-integer
+    into the binheap.
+    """
+    with pytest.raises(TypeError):
+        random_heap.push('heap')
+
+
+def test_init_with_non_iterable():
+    """
+    Ensure we raise an error when trying to init with
+    non integer.
+    """
+    from src.binheap import BinHeap
+    with pytest.raises(ValueError):
+        min_heap = BinHeap(777)
