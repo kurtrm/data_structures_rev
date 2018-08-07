@@ -22,11 +22,8 @@ class BinHeap:
         """
         Starting from the top position, sort down the items in the list to get the max at the top.
         """
+        left, right = (index * 2) + 1, (index * 2) + 2
         try:
-            if index:
-                left, right = (index * 2) + 1, (index * 2) + 2
-            else:
-                left, right = 1, 2
             if self._iterable[left] < self._iterable[right]:
                 idx, highest = left, self._iterable[left]
             else:
