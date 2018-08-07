@@ -2,16 +2,33 @@
 from typing import List, Any
 from collections import namedtuple
 
+
 Node = namedtuple('Node', ['priority', 'value'])
 
 
 class PriorityQueue:
     """Raw Python implementation of a priority queue."""
 
-    def __init__(self) -> None:
-        """Initialize our priority queue."""
-        self._heap = []
-        self._length = 0
+    def __init__(self, iterable: Union[None, Iterable[tuple]]=None) -> None:
+        """
+        Initialize our priority queue.
+        Accepts a list of tuples.
+        """
+        try:
+            self._iterable = []
+            for num in iterable:
+                self.push(num)
+        except TypeError:
+            if iterable is None:
+                self._iterable = []
+            else:
+                raise ValueError('Argument must be an iterable')
+
+
+    def _sort_down(self, index=0): None:
+        """
+        """
+
 
     def heapify(self) -> List:
         """Function to heapify our list of tuples (self._heap)."""
@@ -55,3 +72,9 @@ class PriorityQueue:
     def size(self) -> int:
         """Return the size of our priority queue."""
         return self._length
+
+    def __len__(self):
+        """
+        Return the size of the priority queue.
+        """
+        return self.size()
