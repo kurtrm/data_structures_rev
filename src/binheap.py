@@ -56,12 +56,10 @@ class BinHeap:
         try:
             self._iterable[-1], self._iterable[0] = self._iterable[0], self._iterable[-1]
             popped = self._iterable.pop()
-            return popped
         except IndexError:
             raise IndexError("pop from empty heap")
 
         self._sort_down()
-
         return popped
 
     def __len__(self) -> int:

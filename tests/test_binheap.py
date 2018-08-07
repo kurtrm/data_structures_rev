@@ -71,6 +71,7 @@ def test_empty_heap_pop(empty_heap):
 
 def test_successful_pop(full_heap):
     """Test that we get the smallest number when we pop."""
+    # import pdb; pdb.set_trace()
     assert full_heap.pop() == 0
     assert full_heap._iterable[0] == 1
     assert full_heap.pop() == 1
