@@ -1,5 +1,5 @@
 """Implement binary search tree."""
-from typing import Any
+from typing import Any, List, Union
 
 
 class Node:
@@ -16,15 +16,16 @@ class Node:
 class BinTree:
     """Implement a binary search tree."""
 
-    def __init__(self, val=None):
+    def __init__(self, val: Union[List, tuple, None]=None) -> None:
         """Instantiate a new BST."""
         self._root = None
         self._size = 0
-        if type(val) in [list, tuple]:
+        try:
             for item in val:
                 self.insert(item)
-        elif val:
-            raise ValueError('BST only accepts optional parameter of a list or tuple')
+        except TypeError:
+            if val is not None:
+                raise ValueError('BST only accepts optional parameter of a list or tuple')
 
     def insert(self, val):
         """Insert a value into a BST."""
