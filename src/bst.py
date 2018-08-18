@@ -27,10 +27,10 @@ class BinTree:
             if val is not None:
                 raise ValueError('BST only accepts optional parameter of a list or tuple')
 
-    def insert(self, val):
+    def insert(self, val: Union[int, float]) -> None:
         """Insert a value into a BST."""
-        if type(val) not in [int, float]:
-            raise ValueError('Please insert only integers or floats')
+        if not isinstance(val, (int, float)):
+            raise ValueError('val argument must be integer or float')
         if not self._root:
             self._root = Node(val)
             self._size += 1
@@ -56,12 +56,12 @@ class BinTree:
                 else:
                     return
 
-    def search(self, val):
-        """Insert a value into a BST."""
+    def search(self, val: Union[int, float]) -> Union[None, 'Node']:
+        """Search for a value in the BST."""
         if type(val) not in [int, float]:
             raise ValueError('BST is only made of numbers')
         if not self._root:
-            return None
+            return
         else:
             curr = self._root
             while curr:
@@ -70,23 +70,27 @@ class BinTree:
                         curr = curr.right
                         continue
                     else:
-                        return None
+                        return
                 elif val < curr.val:
                     if curr.left:
                         curr = curr.left
                         continue
                     else:
-                        return None
+                        return
                 elif val == curr.val:
                     return curr
 
-    def contains(self, val):
-        """Check to see if the BST contains a value."""
-        if self.search(val):
-            return True
-        return False
+    def recursive_search(self, val: Union[int, float]) -> None:
 
-    def size(self):
+    def __contains__(self, val: Union[int, float]) -> bool:
+        """Check to see if the BST contains a value."""
+        return bool(self.search(val))
+
+    def size(self) -> int:
+        """Return the total number of nodes in the BST."""
+        return self._size
+
+    def __len__(self) -> int:
         """Return the total number of nodes in the BST."""
         return self._size
 
