@@ -30,8 +30,8 @@ class PriorityQueue:
 
     def _sort_down(self, index: int=0) -> None:
         """
+        Sorts down the priority queue after removal of the highest value.
         """
-        # import pdb; pdb.set_trace()
         left, right = (index * 2) + 1, (index * 2) + 2
         try:
             if self._heap[left].priority < self._heap[right].priority:
