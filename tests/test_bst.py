@@ -134,9 +134,9 @@ def test_search_more(binary_tree):
 
 def test_size(binary_tree):
     """Test that we get the correct size."""
-    binary_tree.size() == 1
+    binary_tree.size == 1
     binary_tree.insert(3)
-    binary_tree.size() == 2
+    binary_tree.size == 2
 
 
 def test_depth(binary_tree):

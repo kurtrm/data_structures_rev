@@ -13,15 +13,6 @@ class Node:
         self.parent = parent
 
 
-"""
-class Node:
-    val: Union[int, float]
-    left: Node
-    right: Node
-    parent: Node
-"""
-
-
 class BinTree:
     """Implement a binary search tree."""
 
@@ -44,8 +35,8 @@ class BinTree:
         node = self._root
         try:
             while val != node.val:
-                    parent = node
-                    node = node.left if val < node.val else node.right
+                parent = node
+                node = node.left if val < node.val else node.right
         except AttributeError:
             if self._root is None:
                 self._root = Node(val)
@@ -61,29 +52,19 @@ class BinTree:
         """
         pass
 
-    def search(self, val: Union[int, float]) -> Union[None, 'Node']:
+    def search(self, val: Union[int, float]) -> Union[None, Node]:
         """Search for a value in the BST."""
-        if type(val) not in [int, float]:
-            raise ValueError('BST is only made of numbers')
-        if not self._root:
-            return
-        else:
-            curr = self._root
-            while curr:
-                if val > curr.val:
-                    if curr.right:
-                        curr = curr.right
-                        continue
-                    else:
-                        return
-                elif val < curr.val:
-                    if curr.left:
-                        curr = curr.left
-                        continue
-                    else:
-                        return
-                elif val == curr.val:
-                    return curr
+        if not isinstance(val, (int, float)):
+            raise ValueError('val argument must be integer or float')
+
+        node = self._root
+        try:
+            while val != node.val:
+                node = node.left if val < node.val else node.right
+            else:
+                return node
+        except AttributeError:
+            pass
 
     def recursive_search(self, val: Union[int, float]) -> None:
         """
@@ -94,6 +75,7 @@ class BinTree:
         """Check to see if the BST contains a value."""
         return bool(self.search(val))
 
+    @property
     def size(self) -> int:
         """Return the total number of nodes in the BST."""
         return self._size
@@ -102,11 +84,11 @@ class BinTree:
         """Return the total number of nodes in the BST."""
         return self._size
 
-    def depth(self, node=None):
+    def depth(self, node: Union[None, Node]=None) -> Node:
         """Find the depth of a specified node."""
-        if not node:
+        if node is None:
             node = self._root
-            if not node:
+            if node is None:
                 return 0
 
         l_depth = 0
@@ -117,17 +99,14 @@ class BinTree:
         if node.right:
             r_depth = self.depth(node.right)
 
-        if not node.left and not node.right:
+        if node.left is None and node.right is None:
             return 1
-        elif l_depth >= r_depth:
-            return l_depth + 1
-        elif l_depth < r_depth:
-            return r_depth + 1
+        return l_depth + 1 if l_depth >= r_depth else r_depth + 1
 
-    def balance(self):
+    def balance(self) -> int:
         """Return an integer representing if the tree is balanced or not."""
         start = self._root
-        if not start:
+        if start is None:
             return 0
 
         l_depth = 0
@@ -138,7 +117,7 @@ class BinTree:
             r_depth = self.depth(start.right)
         return l_depth - r_depth
 
-    def delete(self, val):
+    def delete(self, val: Node) -> None:
         """Delete a given value from the tree and re-order it."""
         start = self.search(val)
         if start:
