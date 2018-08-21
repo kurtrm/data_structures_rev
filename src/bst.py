@@ -44,8 +44,8 @@ class BinTree:
         node = self._root
         try:
             while val != node.val:
-                    parent = node
-                    node = node.left if val < node.val else node.right
+                parent = node
+                node = node.left if val < node.val else node.right
         except AttributeError:
             if self._root is None:
                 self._root = Node(val)
@@ -65,25 +65,36 @@ class BinTree:
         """Search for a value in the BST."""
         if type(val) not in [int, float]:
             raise ValueError('BST is only made of numbers')
-        if not self._root:
+        node = self._root
+        try:
+            while val != node.val:
+                parent = node
+                node = node.left if val < node.val else node.right
+            else:
+                return node
+        except AttributeError:
             return
-        else:
-            curr = self._root
-            while curr:
-                if val > curr.val:
-                    if curr.right:
-                        curr = curr.right
-                        continue
-                    else:
-                        return
-                elif val < curr.val:
-                    if curr.left:
-                        curr = curr.left
-                        continue
-                    else:
-                        return
-                elif val == curr.val:
-                    return curr
+
+
+        # if not self._root:
+        #     return
+        # else:
+        #     curr = self._root
+        #     while curr:
+        #         if val > curr.val:
+        #             if curr.right:
+        #                 curr = curr.right
+        #                 continue
+        #             else:
+        #                 return
+        #         elif val < curr.val:
+        #             if curr.left:
+        #                 curr = curr.left
+        #                 continue
+        #             else:
+        #                 return
+        #         elif val == curr.val:
+        #             return curr
 
     def recursive_search(self, val: Union[int, float]) -> None:
         """
