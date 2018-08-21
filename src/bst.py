@@ -52,10 +52,11 @@ class BinTree:
         """
         pass
 
-    def search(self, val: Union[int, float]) -> Union[None, 'Node']:
+    def search(self, val: Union[int, float]) -> Union[None, Node]:
         """Search for a value in the BST."""
         if not isinstance(val, (int, float)):
             raise ValueError('val argument must be integer or float')
+
         node = self._root
         try:
             while val != node.val:
@@ -83,11 +84,11 @@ class BinTree:
         """Return the total number of nodes in the BST."""
         return self._size
 
-    def depth(self, node=None):
+    def depth(self, node: Union[None, Node]=None) -> Node:
         """Find the depth of a specified node."""
-        if not node:
+        if node is None:
             node = self._root
-            if not node:
+            if node is None:
                 return 0
 
         l_depth = 0
@@ -98,12 +99,9 @@ class BinTree:
         if node.right:
             r_depth = self.depth(node.right)
 
-        if not node.left and not node.right:
+        if node.left is None and node.right is None:
             return 1
-        elif l_depth >= r_depth:
-            return l_depth + 1
-        elif l_depth < r_depth:
-            return r_depth + 1
+        return l_depth + 1 if l_depth >= r_depth else r_depth + 1
 
     def balance(self):
         """Return an integer representing if the tree is balanced or not."""
