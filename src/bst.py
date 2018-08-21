@@ -13,6 +13,15 @@ class Node:
         self.parent = parent
 
 
+"""
+class Node:
+    val: Union[int, float]
+    left: Node
+    right: Node
+    parent: Node
+"""
+
+
 class BinTree:
     """Implement a binary search tree."""
 
@@ -25,7 +34,7 @@ class BinTree:
                 self.insert(item)
         except TypeError:
             if val is not None:
-                raise ValueError('BST only accepts optional parameter of a list or tuple')
+                raise ValueError("'val' argument must be iterable or None")
 
     def insert(self, val: Union[int, float]) -> None:
         """Insert a value into a BST."""
