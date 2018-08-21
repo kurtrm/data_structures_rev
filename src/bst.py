@@ -40,29 +40,23 @@ class BinTree:
         """Insert a value into a BST iteratively."""
         if not isinstance(val, (int, float)):
             raise ValueError('val argument must be integer or float')
-        if self._root is None:
-            self._root = Node(val)
-            self._size += 1
-        else:
-            curr = self._root
-            while curr:
-                if val > curr.val:
-                    if curr.right:
-                        curr = curr.right
-                    else:
-                        curr.right = Node(val, parent=curr)
-                        self._size += 1
-                        return
-                elif val < curr.val:
-                    if curr.left:
-                        curr = curr.left
-                        continue
-                    else:
-                        curr.left = Node(val, parent=curr)
-                        self._size += 1
-                        return
+        node = self._root
+        while True:
+            try:
+                if val != node.val:
+                    parent = node
+                    node = node.left if val < node.val else node.right
                 else:
                     break
+            except AttributeError:
+                if self._root is None:
+                    self._root = Node(val)
+                elif val > parent.val:
+                    parent.right = Node(val, parent=parent)
+                else:
+                    parent.left = Node(val, parent=parent)
+                self._size += 1
+                break
 
     def recursive_insertion(self, val: Union[int, float]) -> None:
         """
