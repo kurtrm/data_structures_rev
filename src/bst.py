@@ -34,13 +34,13 @@ class BinTree:
                 self.insert(item)
         except TypeError:
             if val is not None:
-                raise ValueError("'val' argument must be iterable or None")
+                raise ValueError("Argument must be iterable or None")
 
     def insert(self, val: Union[int, float]) -> None:
-        """Insert a value into a BST."""
+        """Insert a value into a BST iteratively."""
         if not isinstance(val, (int, float)):
             raise ValueError('val argument must be integer or float')
-        if not self._root:
+        if self._root is None:
             self._root = Node(val)
             self._size += 1
         else:
@@ -49,7 +49,6 @@ class BinTree:
                 if val > curr.val:
                     if curr.right:
                         curr = curr.right
-                        continue
                     else:
                         curr.right = Node(val, parent=curr)
                         self._size += 1
@@ -63,7 +62,13 @@ class BinTree:
                         self._size += 1
                         return
                 else:
-                    return
+                    break
+
+    def recursive_insertion(self, val: Union[int, float]) -> None:
+        """
+        Insert a value into the BST recursively instead of iteratively.
+        """
+        pass
 
     def search(self, val: Union[int, float]) -> Union[None, 'Node']:
         """Search for a value in the BST."""
@@ -90,6 +95,9 @@ class BinTree:
                     return curr
 
     def recursive_search(self, val: Union[int, float]) -> None:
+        """
+        """
+        pass
 
     def __contains__(self, val: Union[int, float]) -> bool:
         """Check to see if the BST contains a value."""

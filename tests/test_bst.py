@@ -5,7 +5,7 @@ import pytest
 @pytest.fixture
 def binary_tree():
     """Binary tree for testing."""
-    from bst import BinTree
+    from src.bst import BinTree
     new_tree = BinTree()
     new_tree.insert(5)
     return new_tree
@@ -14,14 +14,14 @@ def binary_tree():
 @pytest.fixture
 def bigger_binary_tree():
     """Larger binary tree for testing."""
-    from bst import BinTree
+    from src.bst import BinTree
     new_tree = BinTree([8, 2, 3, 1, 7, 9, 10])
     return new_tree
 
 
 def test_init_with_empty_bst():
     """Test to see if an empty BST has a root or size."""
-    from bst import BinTree
+    from src.bst import BinTree
     new_tree = BinTree()
     assert new_tree._root is None
     assert new_tree._size == 0
@@ -37,7 +37,7 @@ def test_init_with_val(binary_tree):
 
 def test_init_with_iter():
     """Test to see if instantiating with an iterable works."""
-    from bst import BinTree
+    from src.bst import BinTree
     new_tree = BinTree([3, 2, 1, 4, 5])
     assert new_tree._root.val == 3
     assert new_tree._root.left.val == 2
@@ -48,7 +48,7 @@ def test_init_with_iter():
 
 def test_insert_with_non_int():
     """Test that it only accepts a list or tuple as the optional param."""
-    from bst import BinTree
+    from src.bst import BinTree
     with pytest.raises(ValueError):
         BinTree('this should break it')
 
@@ -114,7 +114,7 @@ def test_search(binary_tree):
 
     Not really sure what we're actually returning here.
     """
-    from bst import Node
+    from src.bst import Node
     assert isinstance(binary_tree.search(5), Node)
     assert binary_tree.search(0) is None
 
@@ -173,16 +173,16 @@ def test_depth_right(binary_tree):
 
 def test_depth_none():
     """Test that we get none back if empty bst."""
-    from bst import BinTree
+    from src.bst import BinTree
     binary_tree = BinTree()
     binary_tree.depth() == 0
 
 
 def test_contains(bigger_binary_tree):
     """Test value is either in there or not."""
-    bigger_binary_tree.contains(8) is True
-    bigger_binary_tree.contains(3) is True
-    bigger_binary_tree.contains(17) is False
+    assert all([8 in bigger_binary_tree,
+               3 in bigger_binary_tree,
+               17 not in bigger_binary_tree])
 
 
 def test_balance(bigger_binary_tree, binary_tree):
