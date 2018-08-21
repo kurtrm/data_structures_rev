@@ -13,15 +13,6 @@ class Node:
         self.parent = parent
 
 
-"""
-class Node:
-    val: Union[int, float]
-    left: Node
-    right: Node
-    parent: Node
-"""
-
-
 class BinTree:
     """Implement a binary search tree."""
 
@@ -63,38 +54,16 @@ class BinTree:
 
     def search(self, val: Union[int, float]) -> Union[None, 'Node']:
         """Search for a value in the BST."""
-        if type(val) not in [int, float]:
-            raise ValueError('BST is only made of numbers')
+        if not isinstance(val, (int, float)):
+            raise ValueError('val argument must be integer or float')
         node = self._root
         try:
             while val != node.val:
-                parent = node
                 node = node.left if val < node.val else node.right
             else:
                 return node
         except AttributeError:
-            return
-
-
-        # if not self._root:
-        #     return
-        # else:
-        #     curr = self._root
-        #     while curr:
-        #         if val > curr.val:
-        #             if curr.right:
-        #                 curr = curr.right
-        #                 continue
-        #             else:
-        #                 return
-        #         elif val < curr.val:
-        #             if curr.left:
-        #                 curr = curr.left
-        #                 continue
-        #             else:
-        #                 return
-        #         elif val == curr.val:
-        #             return curr
+            pass
 
     def recursive_search(self, val: Union[int, float]) -> None:
         """
@@ -105,6 +74,7 @@ class BinTree:
         """Check to see if the BST contains a value."""
         return bool(self.search(val))
 
+    @property
     def size(self) -> int:
         """Return the total number of nodes in the BST."""
         return self._size
