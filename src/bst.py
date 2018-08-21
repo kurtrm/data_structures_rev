@@ -103,10 +103,10 @@ class BinTree:
             return 1
         return l_depth + 1 if l_depth >= r_depth else r_depth + 1
 
-    def balance(self):
+    def balance(self) -> int:
         """Return an integer representing if the tree is balanced or not."""
         start = self._root
-        if not start:
+        if start is None:
             return 0
 
         l_depth = 0
@@ -117,7 +117,7 @@ class BinTree:
             r_depth = self.depth(start.right)
         return l_depth - r_depth
 
-    def delete(self, val):
+    def delete(self, val: Node) -> None:
         """Delete a given value from the tree and re-order it."""
         start = self.search(val)
         if start:
