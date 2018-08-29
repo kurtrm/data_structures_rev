@@ -175,8 +175,6 @@ class BinTree:
 
     def in_order(self, node: Union[None, Node]=None) -> Union[float, int]:
         """Traverse the list in order."""
-        if node and not isinstance(node, Node):
-            raise TypeError('Traversal only accepts None or a Node as params')
         if not node:
             node = self._root
             if not node:
@@ -191,8 +189,6 @@ class BinTree:
 
     def pre_order(self, node: Union[None, Node]=None) -> Union[float, int]:
         """Traverse the list in pre-order."""
-        if node and not isinstance(node, Node):
-            raise TypeError('Traversal only accepts None or a Node as params')
         if not node:
             node = self._root
             if not node:
@@ -207,8 +203,6 @@ class BinTree:
 
     def post_order(self, node: Union[None, Node]=None) -> Union[float, int]:
         """Traverse the list in post-order."""
-        if node and not isinstance(node, Node):
-            raise TypeError('Traversal only accepts None or a Node as params')
         if not node:
             node = self._root
             if not node:
