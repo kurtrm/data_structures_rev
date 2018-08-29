@@ -64,12 +64,24 @@ class BinTree:
             else:
                 return node
         except AttributeError:
-            pass
+            return
 
-    def recursive_search(self, val: Union[int, float]) -> None:
+    def recursive_search(self, val: Union[int, float], node=None) -> None:
         """
         """
-        pass
+        if not isinstance(val, (int, float)):
+            raise ValueError('val argument must be integer or float')
+
+        if node is None:
+            node = self._root
+            if node is None:
+                return
+
+        if val != node.val:
+            node = node.left if val < node.val else node.right
+            return self.recursive_search(val, node)
+        else:
+            return node
 
     def __contains__(self, val: Union[int, float]) -> bool:
         """Check to see if the BST contains a value."""
@@ -117,11 +129,11 @@ class BinTree:
             r_depth = self.depth(start.right)
         return l_depth - r_depth
 
-    def delete(self, val: Node) -> None:
+    def delete(self, val: Union[int, float]) -> None:
         """Delete a given value from the tree and re-order it."""
         start = self.search(val)
         if start:
-            is_root = True if start is self._root else False
+            is_root = start is self._root
 
             if not start.left and not start.right:  # if no children
                 if is_root:
@@ -161,7 +173,7 @@ class BinTree:
             self._size -= 1
         return None
 
-    def in_order(self, node=None):
+    def in_order(self, node: Union[None, Node]=None) -> Union[float, int]:
         """Traverse the list in order."""
         if node and not isinstance(node, Node):
             raise TypeError('Traversal only accepts None or a Node as params')
@@ -177,7 +189,7 @@ class BinTree:
             for each_val in self.in_order(node.right):
                 yield each_val
 
-    def pre_order(self, node=None):
+    def pre_order(self, node: Union[None, Node]=None) -> Union[float, int]:
         """Traverse the list in pre-order."""
         if node and not isinstance(node, Node):
             raise TypeError('Traversal only accepts None or a Node as params')
@@ -193,7 +205,7 @@ class BinTree:
             for each_val in self.pre_order(node.right):
                 yield each_val
 
-    def post_order(self, node=None):
+    def post_order(self, node: Union[None, Node]=None) -> Union[float, int]:
         """Traverse the list in post-order."""
         if node and not isinstance(node, Node):
             raise TypeError('Traversal only accepts None or a Node as params')
