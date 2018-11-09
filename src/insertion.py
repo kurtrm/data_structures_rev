@@ -22,17 +22,34 @@ def insertion_sort(lineup: list) -> list:
     # return lineup
 
     # Version 1.1
+    # lineup_copy = type(lineup)(lineup)
+    # for idx in range(len(lineup)):
+    #     candidate = lineup[idx]
+    #     curr_idx = idx
+    #     while curr_idx > 0:
+    #         back_idx = curr_idx - 1
+    #         prev_candidate = lineup_copy[back_idx]
+    #         if candidate < prev_candidate:
+    #             lineup_copy[curr_idx], lineup_copy[back_idx] = prev_candidate, candidate
+    #         curr_idx -= 1
+    # return lineup_copy
+
+    # Version 1.2
     lineup_copy = type(lineup)(lineup)
-    for idx in range(len(lineup)):
-        candidate = lineup[idx]
+    for idx in range(len(lineup_copy)):
+        candidate = lineup_copy.pop(idx)
         curr_idx = idx
         while curr_idx > 0:
             back_idx = curr_idx - 1
             prev_candidate = lineup_copy[back_idx]
-            if candidate < prev_candidate:
-                lineup_copy[curr_idx], lineup_copy[back_idx] = prev_candidate, candidate
-            curr_idx -= 1
+            if not candidate < prev_candidate:
+                break
+            else:
+                curr_idx -= 1
+        lineup_copy.insert(curr_idx, candidate)
     return lineup_copy
+
+
 
 
 if __name__ == '__main__':  # pragma: no cover
