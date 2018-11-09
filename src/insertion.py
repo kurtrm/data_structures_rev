@@ -50,8 +50,6 @@ def insertion_sort(lineup: list) -> list:
     return lineup_copy
 
 
-
-
 if __name__ == '__main__':  # pragma: no cover
     from timeit import Timer
     random = Timer(
