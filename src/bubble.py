@@ -2,7 +2,7 @@
 from collections.abc import Iterable
 
 
-def bubble_sort(lineup: 'Iterable') -> 'Iterable':
+def bubble_sort(lineup: Iterable) -> Iterable:
     """
     Sort the iterable using the Bubble sort method.
     params

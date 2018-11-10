@@ -8,8 +8,8 @@ from importlib import import_module
 
 IN_PLACE = False
 STABLE = False
-MODULENAME = 'src.merge'
-FUNCNAME = 'merge_sort'
+MODULENAME = 'src.insertion'
+FUNCNAME = 'insertion_sort'
 
 
 module = import_module(MODULENAME, '..')
